@@ -3,7 +3,12 @@ NAME	= test
 CC		= c++
 CFLAGS	= -Wall -Wextra  -std=c++98 #-Werror
 INCLUDE =	-I ./includes
-HEADERS	= ./includes/Vector.hpp
+HEADERS	= $(addprefix ./includes/, \
+			Vector.hpp \
+			Colors.hpp \
+			ft_iterator_base.hpp \
+			IteratorVector.hpp \
+			)
 
 SRC		= main.cpp
 
