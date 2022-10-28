@@ -27,8 +27,125 @@ class random_access_iterator {
 
   // ****************** Member functions ******************
  public:
+  // Default constructor
+  random_access_iterator() : _ptr(NULL) {}
 
+  // Constructor
+  explicit random_access_iterator(pointer ptr) : _ptr(ptr) {}
+
+  // Copy constructor
+  random_access_iterator(const random_access_iterator &other) : _ptr(other._ptr) {}
+
+  // Destructor
+  ~random_access_iterator() {}
+
+  // Copy assignment operator
+  random_access_iterator &operator=(const random_access_iterator &other) {
+    if (this != &other) {
+      _ptr = other._ptr;
+    }
+    return *this;
+  }
+
+  // underlying base iterator.
+  pointer base() const { return _ptr; }
+
+  // Equality operator
+  bool operator==(const random_access_iterator<T> &other) const { return _ptr == other._ptr; }
+
+  // Inequality operator
+  bool operator!=(const random_access_iterator<T> &other) const { return _ptr != other._ptr; }
+
+  // Dereference operator
+  reference operator*() const { return *_ptr; }
+
+  // Dereference operator
+  pointer operator->() const { return _ptr; }
+
+  // Prefix increment operator
+  random_access_iterator &operator++() {
+    ++_ptr;
+    return *this;
+  }
+
+  // Postfix increment operator
+  random_access_iterator operator++(int) {
+    random_access_iterator tmp(*this);
+    ++_ptr;
+    return tmp;
+  }
+
+  // Prefix decrement operator
+  random_access_iterator &operator--() {
+    --_ptr;
+    return *this;
+  }
+
+  // Postfix decrement operator
+  random_access_iterator operator--(int) {
+    random_access_iterator tmp(*this);
+    --_ptr;
+    return tmp;
+  }
+
+  // Addition assignment operator
+  random_access_iterator &operator+=(difference_type n) {
+    _ptr += n;
+    return *this;
+  }
+
+  // Subtraction assignment operator
+  random_access_iterator &operator-=(difference_type n) {
+    _ptr -= n;
+    return *this;
+  }
+
+  // Addition operator
+  random_access_iterator operator+(difference_type n) const {
+    random_access_iterator tmp(*this);
+    tmp += n;
+    return tmp;
+  }
+
+  // Subtraction operator
+  random_access_iterator operator-(difference_type n) const {
+    random_access_iterator tmp(*this);
+    tmp -= n;
+    return tmp;
+  }
+
+  // Comparison operator
+  bool operator<(const random_access_iterator<T> &other) const { return _ptr < other._ptr; }
+
+  // Comparison operator
+  bool operator>(const random_access_iterator<T> &other) const { return _ptr > other._ptr; }
+
+  // Comparison operator
+  bool operator<=(const random_access_iterator<T> &other) const { return _ptr <= other._ptr; }
+
+  // Comparison operator
+  bool operator>=(const random_access_iterator<T> &other) const { return _ptr >= other._ptr; }
+
+
+// ****************** Member variables ******************
+ private:
+  pointer _ptr;
 };
+
+// Addition operator
+template<typename T>
+random_access_iterator<T> operator+(typename random_access_iterator<T>::difference_type n,
+                                    const random_access_iterator<T> &it) {
+  return it + n;
+}
+
+// Subtraction operator
+template<typename T>
+typename random_access_iterator<T>::difference_type operator-(const random_access_iterator<T> &lhs,
+                                                              const random_access_iterator<T> &rhs) {
+  return lhs.base() - rhs.base();
+}
+
 };
 
 #endif //FT_CONTAINERS_ITERATORVECTOR_HPP
