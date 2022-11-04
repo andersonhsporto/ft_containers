@@ -6,6 +6,7 @@
 #define FT_CONTAINERS_VECTOR_HPP
 
 #include "IteratorVector.hpp"
+#include <string>
 
 namespace ft {
 template<class T, class Allocator = std::allocator<T> >
@@ -60,6 +61,25 @@ class vector {
       _allocator.construct(_data + i, val);
     }
   }
+
+  // destructor
+  ~vector() {
+    for (size_type i = 0; i < _size; i++) {
+      _allocator.destroy(_data + i);
+    }
+    if (_data != NULL) {
+      _allocator.deallocate(_data, _capacity);
+    }
+  }
+
+//    // copy constructor
+//    vector(const vector &x) : _size(x._size), _capacity(x._capacity), _allocator(x._allocator) {
+//      _data = _allocator.allocate(_capacity);
+//      for (size_type i = 0; i < _size; i++) {
+//        _allocator.construct(_data + i, x._data[i]);
+//      }
+//    }
+
 
 
 

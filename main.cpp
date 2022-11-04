@@ -1,9 +1,15 @@
-#include "./includes/Vector.hpp"
-#include "./includes/Colors.hpp"
-#include <vector>
+//#include "./includes/Vector.hpp"
+//#include "./includes/Colors.hpp"
+//#include <vector>
+
+#include <iostream>
+#include <math.h>
+
 
 int main() {
   std::vector<int> values;
+
+  int t = std::stoi("123");
 
   values.push_back(1);
   values.push_back(2);
