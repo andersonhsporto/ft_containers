@@ -9,6 +9,7 @@ HEADERS	= $(addprefix ./includes/, \
 			ft_iterator_base.hpp \
 			ft_iterator_types.hpp \
 			ft_utility.hpp \
+			ft_algorithm.hpp \
 			IteratorVector.hpp \
 			)
 
