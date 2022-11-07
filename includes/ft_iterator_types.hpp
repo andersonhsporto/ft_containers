@@ -59,6 +59,14 @@ struct is_integral<long long> : public integral_constant<bool, true> {};
 template<>
 struct is_integral<unsigned long long> : public integral_constant<bool, true> {};
 
+template<bool B, class T = void>
+struct enable_if {};
+
+template<class T>
+struct enable_if<true, T> {
+  typedef T type;
+};
+
 };
 
 #endif //FT_CONTAINERS_FT_ITERATOR_TYPES_HPP

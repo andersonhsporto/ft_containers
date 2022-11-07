@@ -1,7 +1,7 @@
 NAME	= test
 
 CC		= c++
-CFLAGS	= -Wall -Wextra  -std=c++98 #-Werror
+CFLAGS	= -Wall -Wextra -g -std=c++98 #-Werror
 INCLUDE =	-I ./includes
 HEADERS	= $(addprefix ./includes/, \
 			Vector.hpp \

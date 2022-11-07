@@ -18,9 +18,11 @@ class vector {
   // ***********************************************************************************************
   // *************************************** Member types ******************************************
  public:
-  typedef typename Allocator::reference reference;
+  typedef Allocator allocator_type;
 
-  typedef typename Allocator::const_reference const_reference;
+  typedef typename allocator_type::reference reference;
+
+  typedef typename allocator_type::const_reference const_reference;
 
   typedef std::size_t size_type;
 
@@ -28,11 +30,9 @@ class vector {
 
   typedef T value_type;
 
-  typedef Allocator allocator_type;
+  typedef typename allocator_type::pointer pointer;
 
-  typedef typename Allocator::pointer pointer;
-
-  typedef typename Allocator::const_pointer const_pointer;
+  typedef typename allocator_type::const_pointer const_pointer;
 
   typedef ft::random_access_iterator<value_type> iterator;
 
@@ -49,8 +49,8 @@ class vector {
  public:
 
   // default constructor without parameters
-  vector() : _size(0), _capacity(0), _allocator(Allocator()) {
-    _data = NULL;
+  vector() : _size(0), _capacity(0), _data(NULL) {
+    _allocator = allocator_type();
   }
 
   // default constructor with allocator parameter
@@ -327,7 +327,7 @@ class vector {
     _size += n;
   }
 
-// Erases the specified elements
+  // Erases the specified elements
   iterator erase(iterator pos) {
     for (size_type i = pos - begin(); i < _size - 1; i++) {
       _allocator.construct(_data + i, _data[i + 1]);
@@ -366,6 +366,9 @@ class vector {
 
   //  Adds an element to the end
   void push_back(const value_type &value) {
+    if (_capacity == 0) {
+      reserve(1);
+    }
     if (_size == _capacity) {
       reserve(_capacity * 2);
     }
@@ -423,10 +426,6 @@ class vector {
   allocator_type _allocator;
 };
 
-// ***********************************************************************************************//
-// ***********************************************************************************************//
-// ***********************************************************************************************//
-
 // ************************************* Non-member functions **************************************
 
 template<class T, class Alloc>
@@ -446,7 +445,8 @@ bool operator<(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) {
 
 template<class T, class Alloc>
 bool operator<=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) {
-  return !ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end()) || ft::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+  return !ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end())
+      || ft::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
 template<class T, class Alloc>
@@ -456,7 +456,8 @@ bool operator>(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) {
 
 template<class T, class Alloc>
 bool operator>=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) {
-  return !ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()) || ft::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+  return !ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end())
+      || ft::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
 template<class T, class Alloc>
@@ -464,7 +465,6 @@ void swap(vector<T, Alloc> &x, vector<T, Alloc> &y) {
   x.swap(y);
 }
 
-}  // namespace ft
-
+}  // End of namespace ft
 
 #endif //FT_CONTAINERS_VECTOR_HPP
