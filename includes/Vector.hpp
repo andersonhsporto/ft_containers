@@ -6,13 +6,14 @@
 #define FT_CONTAINERS_VECTOR_HPP
 
 #include "IteratorVector.hpp"
+#include "ft_iterator_types.hpp"
 #include <string>
 
 namespace ft {
 template<class T, class Allocator = std::allocator<T> >
 class vector {
-// ****************** Member types ******************
 
+// ****************** Member types ******************
  public:
   typedef typename Allocator::reference reference;
 
@@ -34,9 +35,9 @@ class vector {
 
   typedef ft::random_access_iterator<const value_type> const_iterator;
 
-  // TODO: Implement iterator
-  //  typedef std::reverse_iterator<iterator> reverse_iterator;
-  //  typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
+  typedef ft::reverse_iterator<iterator> reverse_iterator;
+
+  typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
 // ****************** Member functions ******************
  public:
@@ -72,14 +73,46 @@ class vector {
     }
   }
 
-//    // copy constructor
-//    vector(const vector &x) : _size(x._size), _capacity(x._capacity), _allocator(x._allocator) {
-//      _data = _allocator.allocate(_capacity);
-//      for (size_type i = 0; i < _size; i++) {
-//        _allocator.construct(_data + i, x._data[i]);
-//      }
-//    }
+// copy constructor
+  vector(const vector &other)
+      : _size(other._size), _capacity(other._capacity), _allocator(other._allocator) {
 
+    *this = other;
+  }
+
+// copy assignment operator
+  vector &operator=(const vector &other) {
+    if (this != &other) {
+      _size = other._size;
+      _capacity = other._capacity;
+      _allocator = other._allocator;
+      _data = _allocator.allocate(_capacity);
+      for (size_type i = 0; i < _size; i++) {
+        _allocator.construct(_data + i, other._data[i]);
+      }
+    }
+    return *this;
+  }
+
+// range constructor
+  template<class InputIterator>
+  vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type(),
+         typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
+
+    _size = first - last;
+    _data = _allocator.allocate(_size);
+    _capacity = _size;
+    for (size_type i = 0; i < _size; i++) {
+      _allocator.construct(_data + i, *first);
+      first++;
+    }
+  }
+
+  // Assign new contents to the vector, replacing its current contents, and modifying its size accordingly.
+  template<class InputIterator>
+  void assign(InputIterator first, InputIterator last) {
+
+  }
 
 
 
