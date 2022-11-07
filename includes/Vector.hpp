@@ -108,12 +108,30 @@ class vector {
     }
   }
 
-  // Assign new contents to the vector, replacing its current contents, and modifying its size accordingly.
-  template<class InputIterator>
-  void assign(InputIterator first, InputIterator last) {
+  // ****************** Member functions ******************
 
+  // Replaces the contents of the container
+  void assign(size_type n, const value_type &val) {
+    clear();
+    _size = n;
+    _capacity = n;
+    _data = _allocator.allocate(_capacity);
+    for (size_type i = 0; i < _size; i++) {
+      _allocator.construct(_data + i, val);
+    }
   }
 
+
+
+  // ****************** Modifiers ******************
+
+  // Erases all elements from the container. After this call, size() returns zero.
+  void clear() {
+    for (size_type i = 0; i < _size; i++) {
+      _allocator.destroy(_data + i);
+    }
+    _size = 0;
+  }
 
 
 // ***********************************************************************************************//
