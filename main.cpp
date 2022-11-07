@@ -14,7 +14,7 @@ int main() {
 //  values.push_back(5);
 //
 //  std::cout << "Not using iterators" << std::endl;
-//  for (int i = 0; i < values.size(); i++) {
+//  for (size_t i = 0; i < values.size(); i++) {
 //    std::cout << CYAN << values[i] << RESET << std::endl;
 //  }
 //
@@ -38,7 +38,7 @@ void ft_vectorTest() {
   values.push_back(5);
 
   std::cout << "Not using iterators" << std::endl;
-  for (int i = 0; i < values.size(); i++) {
+  for (size_t i = 0; i < values.size(); i++) {
     std::cout << CYAN << values[i] << RESET << std::endl;
   }
 
