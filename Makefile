@@ -4,13 +4,13 @@ CC		= c++
 CFLAGS	= -Wall -Wextra -g -std=c++98 #-Werror
 INCLUDE =	-I ./includes
 HEADERS	= $(addprefix ./includes/, \
-			Vector.hpp \
 			Colors.hpp \
+			ft_algorithm.hpp \
 			ft_iterator_base.hpp \
 			ft_iterator_types.hpp \
 			ft_utility.hpp \
-			ft_algorithm.hpp \
 			IteratorVector.hpp \
+			Vector.hpp \
 			)
 
 SRC		= main.cpp
