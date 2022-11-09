@@ -128,7 +128,6 @@ class vector {
     }
   }
 
-
   // Replaces the contents of the container range version
   template<class InputIterator>
   void assign(InputIterator first, InputIterator last,
@@ -232,6 +231,16 @@ class vector {
   // Returns a reverse iterator to the beginning (const)
   const_reverse_iterator rbegin() const {
     return const_reverse_iterator(end());
+  }
+
+  // Returns a reverse iterator to the end
+  reverse_iterator rend() {
+    return reverse_iterator(begin());
+  }
+
+  // Returns a reverse iterator to the end (const)
+  const_reverse_iterator rend() const {
+    return const_reverse_iterator(begin());
   }
   // **********************************************************************************************
   // **********************************************************************************************
