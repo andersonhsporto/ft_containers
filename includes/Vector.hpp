@@ -8,7 +8,6 @@
 #include "IteratorVector.hpp"
 #include "ft_iterator_types.hpp"
 #include "ft_algorithm.hpp"
-#include <string>
 
 namespace ft {
 template<class T, class Allocator = std::allocator<T> >
@@ -102,16 +101,12 @@ class vector {
 
   // range constructor
   template<class InputIterator>
-  vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type(),
-         typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
+  vector(InputIterator first, InputIterator last,
+         const allocator_type &alloc = allocator_type())
+      : _size(0), _capacity(0), _allocator(alloc) {
 
-    _size = first - last;
-    _data = _allocator.allocate(_size);
-    _capacity = _size;
-    for (size_type i = 0; i < _size; i++) {
-      _allocator.construct(_data + i, *first);
-      first++;
-    }
+    _data = NULL;
+    assign(first, last);
   }
 
   // ***********************************************************************************************
@@ -126,6 +121,17 @@ class vector {
     _data = _allocator.allocate(_capacity);
     for (size_type i = 0; i < _size; i++) {
       _allocator.construct(_data + i, val);
+    }
+  }
+
+  // Replaces the contents of the container range version
+  template<class InputIterator>
+  void assign(InputIterator first, InputIterator last,
+              typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
+    clear();
+    reserve(last - first);
+    for (; first != last; first++) {
+      push_back(*first);
     }
   }
 
@@ -222,6 +228,16 @@ class vector {
   const_reverse_iterator rbegin() const {
     return const_reverse_iterator(end());
   }
+
+  // Returns a reverse iterator to the end
+  reverse_iterator rend() {
+    return reverse_iterator(begin());
+  }
+
+  // Returns a reverse iterator to the end (const)
+  const_reverse_iterator rend() const {
+    return const_reverse_iterator(begin());
+  }
   // **********************************************************************************************
   // **********************************************************************************************
   // ****************************************** Capacity ******************************************
@@ -268,9 +284,9 @@ class vector {
     return _capacity;
   }
 
-  // ***********************************************************************************************
-  // ***********************************************************************************************
-  // ****************************************** Modifiers ******************************************
+  // **********************************************************************************************
+  // **********************************************************************************************
+  // ****************************************** Modifiers *****************************************
 
 // Erases all elements from the container. After this call, size() returns zero.
   void clear() {
@@ -285,7 +301,10 @@ class vector {
     if (_size == _capacity) {
       reserve(_capacity * 2);
     }
-    for (size_type i = _size; i > position - begin(); i--) {
+
+    size_type pos = position - begin();
+
+    for (size_type i = _size; i > pos; i--) {
       _allocator.construct(_data + i, _data[i - 1]);
       _allocator.destroy(_data + i - 1);
     }
@@ -299,7 +318,10 @@ class vector {
     if (_size + n > _capacity) {
       reserve(_capacity * 2);
     }
-    for (size_type i = _size; i > position - begin(); i--) {
+
+    size_type pos = position - begin();
+
+    for (size_type i = _size; i > pos; i--) {
       _allocator.construct(_data + i + n - 1, _data[i - 1]);
       _allocator.destroy(_data + i - 1);
     }
@@ -311,7 +333,8 @@ class vector {
 
   // Inserts elements from range [first, last]
   template<class InputIterator>
-  void insert(iterator position, InputIterator first, InputIterator last) {
+  void insert(iterator position, InputIterator first, InputIterator last,
+              typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
     size_type n = last - first;
 
     if (_size + n > _capacity) {
@@ -407,10 +430,10 @@ class vector {
     std::swap(_allocator, other._allocator);
   }
 
-// ***********************************************************************************************//
-// ***********************************************************************************************//
-// ***********************************************************************************************//
-// ***********************************************************************************************//
+// ************************************************************************************************
+// ************************************************************************************************
+// ************************************************************************************************
+// ************************************************************************************************
  private:
 
   //  size of the custom vector (number of elements)
@@ -426,16 +449,16 @@ class vector {
   allocator_type _allocator;
 };
 
-// ************************************* Non-member functions **************************************
+// ************************************* Non-member functions *************************************
 
 template<class T, class Alloc>
 bool operator==(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) {
-  return ft::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+  return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 }
 
 template<class T, class Alloc>
 bool operator!=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) {
-  return !ft::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+  return (!(ft::equal(lhs.begin(), lhs.end(), rhs.begin())));
 }
 
 template<class T, class Alloc>
