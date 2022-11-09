@@ -101,16 +101,12 @@ class vector {
 
   // range constructor
   template<class InputIterator>
-  vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type(),
-         typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
+  vector(InputIterator first, InputIterator last,
+         const allocator_type &alloc = allocator_type())
+      : _size(0), _capacity(0), _allocator(alloc) {
 
-    _size = first - last;
-    _data = _allocator.allocate(_size);
-    _capacity = _size;
-    for (size_type i = 0; i < _size; i++) {
-      _allocator.construct(_data + i, *first);
-      first++;
-    }
+    _data = NULL;
+    assign(first, last);
   }
 
   // ***********************************************************************************************
@@ -305,7 +301,10 @@ class vector {
     if (_size == _capacity) {
       reserve(_capacity * 2);
     }
-    for (size_type i = _size; i > position - begin(); i--) {
+
+    size_type pos = position - begin();
+
+    for (size_type i = _size; i > pos; i--) {
       _allocator.construct(_data + i, _data[i - 1]);
       _allocator.destroy(_data + i - 1);
     }
@@ -319,7 +318,10 @@ class vector {
     if (_size + n > _capacity) {
       reserve(_capacity * 2);
     }
-    for (size_type i = _size; i > position - begin(); i--) {
+
+    size_type pos = position - begin();
+
+    for (size_type i = _size; i > pos; i--) {
       _allocator.construct(_data + i + n - 1, _data[i - 1]);
       _allocator.destroy(_data + i - 1);
     }
@@ -331,7 +333,8 @@ class vector {
 
   // Inserts elements from range [first, last]
   template<class InputIterator>
-  void insert(iterator position, InputIterator first, InputIterator last) {
+  void insert(iterator position, InputIterator first, InputIterator last,
+              typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
     size_type n = last - first;
 
     if (_size + n > _capacity) {
@@ -450,12 +453,12 @@ class vector {
 
 template<class T, class Alloc>
 bool operator==(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) {
-  return ft::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+  return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 }
 
 template<class T, class Alloc>
 bool operator!=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) {
-  return !ft::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+  return (!(ft::equal(lhs.begin(), lhs.end(), rhs.begin())));
 }
 
 template<class T, class Alloc>
