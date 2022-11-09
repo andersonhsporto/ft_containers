@@ -8,7 +8,6 @@
 #include "IteratorVector.hpp"
 #include "ft_iterator_types.hpp"
 #include "ft_algorithm.hpp"
-#include <string>
 
 namespace ft {
 template<class T, class Allocator = std::allocator<T> >
@@ -126,6 +125,18 @@ class vector {
     _data = _allocator.allocate(_capacity);
     for (size_type i = 0; i < _size; i++) {
       _allocator.construct(_data + i, val);
+    }
+  }
+
+
+  // Replaces the contents of the container range version
+  template<class InputIterator>
+  void assign(InputIterator first, InputIterator last,
+              typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
+    clear();
+    reserve(last - first);
+    for (; first != last; first++) {
+      push_back(*first);
     }
   }
 
@@ -268,9 +279,9 @@ class vector {
     return _capacity;
   }
 
-  // ***********************************************************************************************
-  // ***********************************************************************************************
-  // ****************************************** Modifiers ******************************************
+  // **********************************************************************************************
+  // **********************************************************************************************
+  // ****************************************** Modifiers *****************************************
 
 // Erases all elements from the container. After this call, size() returns zero.
   void clear() {
@@ -407,10 +418,10 @@ class vector {
     std::swap(_allocator, other._allocator);
   }
 
-// ***********************************************************************************************//
-// ***********************************************************************************************//
-// ***********************************************************************************************//
-// ***********************************************************************************************//
+// ************************************************************************************************
+// ************************************************************************************************
+// ************************************************************************************************
+// ************************************************************************************************
  private:
 
   //  size of the custom vector (number of elements)
@@ -426,7 +437,7 @@ class vector {
   allocator_type _allocator;
 };
 
-// ************************************* Non-member functions **************************************
+// ************************************* Non-member functions *************************************
 
 template<class T, class Alloc>
 bool operator==(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) {
