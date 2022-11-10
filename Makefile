@@ -1,8 +1,8 @@
 NAME	= test
 
 CC		= c++
-CFLAGS	= -Wall -Wextra -g -std=c++98 #-Werror
-INCLUDE =	-I ./includes
+CFLAGS	= -Wall -Wextra -g -Wshadow -std=c++98 #-Werror
+INCLUDE = -I ./includes
 HEADERS	= $(addprefix ./includes/, \
 			Colors.hpp \
 			ft_algorithm.hpp \
@@ -13,7 +13,10 @@ HEADERS	= $(addprefix ./includes/, \
 			Vector.hpp \
 			)
 
-SRC		= main.cpp
+SRC		= $(addprefix ./src/, \
+          	ft-main.cpp \
+          	testsVectorFT.cpp \
+           )
 
 %.o: %.cpp $(HEADERS)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $(<:%.cpp=%.o)
