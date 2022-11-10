@@ -1,49 +1,12 @@
-#include "./includes/Vector.hpp"
-#include "./includes/Colors.hpp"
-#include <vector>
+//
+// Created by Anderson Porto on 11/9/22.
+//
 
-void testVectorOperatorEqual();
+#include "../includes/Vector.hpp"
+#include "../includes/Colors.hpp"
+#include "../includes/testsVector.hpp"
 
-void testVectorElementAccess();
-
-void testVectorIterators();
-
-void testRangeContructor();
-
-void testVectorPushBack();
-
-void testAssignIntVector();
-
-void testVectorPushBack10K();
-
-void testVectorSize();
-
-void testVectorResize();
-
-void testVectorCapacity();
-
-void testVectorFillConstructor();
-
-void testVectorClear();
-
-void testVectorInsert();
-
-void testVectorErase();
-
-void testSlowOperation();
-
-void testVectorPopBack();
-
-void testVectorSwap();
-
-void testVectorCompares();
-
-int main() {
-
-  // time to test the vector
-  time_t start, end;
-
-  start = time(NULL);
+void testFtVector() {
 
   //  testVectorOperatorEqual();
 //  testAssignIntVector();
@@ -61,20 +24,15 @@ int main() {
 //  testVectorErase();
 //  testSlowOperation();
 //  testVectorPopBack();
-
   testVectorSwap();
   testVectorCompares();
-
-  end = time(NULL);
-
-  std::cout << "Time taken by program is : " << end - start << " seconds" << std::endl;
-  return 0;
 }
+
 
 void testSlowOperation() {
   std::cout << "Vector Slow Operation" << std::endl;
 
-  std::vector<int> myvector;
+  ft::vector<int> myvector;
 
   for (int i = 0; i < 8000000; i++) {
     myvector.push_back(i);
@@ -435,6 +393,60 @@ void testVectorSwap() {
   printStringVector(ft_vector2);
 }
 
+void testComparesEqual(const ft::vector<int> &vector1, const ft::vector<int> &vector2) {
+  std::cout << CYAN << "\noperator== test" << RESET << std::endl;
+  std::cout << CYAN
+            << "ft_vector1 == ft_vector2: "
+            << RESET
+            << (vector1 == vector2)
+            << std::endl;
+}
+
+void testComparesNotEqual(const ft::vector<int> &vector1, const ft::vector<int> &vector2) {
+  std::cout << CYAN << "\noperator!= test" << RESET << std::endl;
+  std::cout << CYAN
+            << "ft_vector1 != ft_vector2: "
+            << RESET
+            << (vector1 != vector2)
+            << std::endl;
+}
+
+void testComparesLess(const ft::vector<int> &vector1, const ft::vector<int> &vector2) {
+  std::cout << CYAN << "\noperator< test" << RESET << std::endl;
+  std::cout << CYAN
+            << "ft_vector1 < ft_vector2: "
+            << RESET
+            << (vector1 < vector2)
+            << std::endl;
+}
+
+void testComparesLessEqual(const ft::vector<int> &vector1, const ft::vector<int> &vector2) {
+  std::cout << CYAN << "\noperator<= test" << RESET << std::endl;
+  std::cout << CYAN
+            << "ft_vector1 <= ft_vector2: "
+            << RESET
+            << (vector1 <= vector2)
+            << std::endl;
+}
+
+void testComparesGreater(const ft::vector<int> &vector1, const ft::vector<int> &vector2) {
+  std::cout << CYAN << "\noperator> test" << RESET << std::endl;
+  std::cout << CYAN
+            << "ft_vector1 > ft_vector2: "
+            << RESET
+            << (vector1 > vector2)
+            << std::endl;
+}
+
+void testComparesGreaterEqual(const ft::vector<int> &vector1, const ft::vector<int> &vector2) {
+  std::cout << CYAN << "\noperator>= test" << RESET << std::endl;
+  std::cout << CYAN
+            << "ft_vector1 >= ft_vector2: "
+            << RESET
+            << (vector1 >= vector2)
+            << std::endl;
+}
+
 void testVectorCompares() {
   std::cout << "\n" << GREEN << "Vector compares test" << RESET << std::endl;
   ft::vector<int> ft_vector1;
@@ -445,19 +457,10 @@ void testVectorCompares() {
     ft_vector2.push_back(i + 1);
   }
 
-  std::cout << CYAN << "\noperator== test" << RESET << std::endl;
-  std::cout << CYAN
-            << "ft_vector1 == ft_vector2: "
-            << RESET
-            << (ft_vector1 == ft_vector2)
-            << std::endl;
-
-  std::cout << CYAN << "\noperator!= test" << RESET << std::endl;
-  std::cout << CYAN
-            << "ft_vector1 != ft_vector2: "
-            << RESET
-            << (ft_vector1 != ft_vector2)
-            << std::endl;
-
-
+  testComparesEqual(ft_vector1, ft_vector2);
+  testComparesNotEqual(ft_vector1, ft_vector2);
+  testComparesLess(ft_vector1, ft_vector2);
+  testComparesLessEqual(ft_vector1, ft_vector2);
+  testComparesGreater(ft_vector1, ft_vector2);
+  testComparesGreaterEqual(ft_vector1, ft_vector2);
 }
