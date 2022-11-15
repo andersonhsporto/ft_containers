@@ -2,8 +2,8 @@
 // Created by Anderson Porto on 11/10/22.
 //
 
-#ifndef FT_CONTAINERS_AVL_HPP
-#define FT_CONTAINERS_AVL_HPP
+#ifndef FT_CONTAINERS_NODE_HPP
+#define FT_CONTAINERS_NODE_HPP
 
 namespace ft {
 template<typename T, class allocator>
@@ -22,7 +22,7 @@ struct Node {
 
   Node() : left(0), right(0), parent(0), data(0), height(0) {}
 
-  Node(const T &data) : left(0), right(0), parent(0), data(0), height(0) {
+  explicit Node(const T &data) : left(0), right(0), parent(0), data(0), height(0) {
     this->data = alloc.allocate(1);
     alloc.construct(this->data, data);
   }
@@ -46,4 +46,4 @@ struct Node {
 };
 }
 
-#endif //FT_CONTAINERS_AVL_HPP
+#endif //FT_CONTAINERS_NODE_HPP
