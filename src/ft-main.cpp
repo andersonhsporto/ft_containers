@@ -1,5 +1,4 @@
-#include "Vector.hpp"
-#include "testsVector.hpp"
+#include "vector.hpp"
 
 void testFtMap();
 
