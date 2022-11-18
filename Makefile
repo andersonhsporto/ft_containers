@@ -23,7 +23,7 @@ TREE_HEADERS	= $(addprefix ./includes/Tree/, \
 SRC		= $(addprefix ./src/, \
           	ft-main.cpp \
           	testsVectorFT.cpp \
-           )
+			)
 
 %.o: %.cpp $(HEADERS) $(TREE_HEADERS)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $(<:%.cpp=%.o)
