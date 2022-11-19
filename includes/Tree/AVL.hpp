@@ -60,28 +60,30 @@ class AVL {
   }
 
   node_type *insert(node_type *n1, const value_type &data) {
-//    if (n1 == NULL) {
-//      return newNode(data);
-//    } else if (data < n1->data) {
-
+    if (!n1) {
+      return newNode(data);
+    } else if (data < n1->data) {
+      n1->left = insert(n1->left, data);
+      if (height(n1->left) - height(n1->right) == 2) {
+        if (data < n1->left->data) {
+          n1 = rotateWithLeftChild(n1);
+        } else {
+          n1 = doubleWithLeftChild(n1);
+        }
+      }
+    } else if (data > n1->data) {
+      n1->right = insert(n1->right, data);
+      if (height(n1->right) - height(n1->left) == 2) {
+        if (data > n1->right->data) {
+          n1 = rotateWithRightChild(n1);
+        } else {
+          n1 = doubleWithRightChild(n1);
+        }
+      }
+    }
+    updateNodeHeight(n1);
+    return n1;
   }
-
-//  node_type *balance(node_type *n1) {
-//    int balance = getBalance(n1);
-//
-//    if (balance > 1) {
-//      if (getBalance(n1->left) < 0) {
-//        n1->left = rotateLeft(n1->left);
-//      }
-//      return rotateRight(n1);
-//    } else if (balance < -1) {
-//      if (getBalance(n1->right) > 0) {
-//        n1->right = rotateRight(n1->right);
-//      }
-//      return rotateLeft(n1);
-//    }
-//    return n1;
-//  }
 
   // TODO:: ?? PRIVATE
   node_type *singleRightRotate(node_type *k2) {
