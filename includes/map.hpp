@@ -7,6 +7,7 @@
 
 #include <memory>
 #include "ft_utility.hpp"
+#include "./Tree/AVL.hpp" // TODO: Simplify this
 
 namespace ft {
 template<
@@ -46,6 +47,10 @@ class map {
   // ***********************************************************************************************
   // *************************************** Member Classes ****************************************
  public:
+
+  // Friend class can access private and protected members
+  // of other class in which it is declared as friend.
+  // It is sometimes useful to allow a particular class to access private members of other class.
   class value_compare : public std::binary_function<value_type, value_type, bool> {
     friend class map;
 
