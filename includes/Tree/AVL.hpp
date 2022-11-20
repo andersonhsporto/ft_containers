@@ -10,7 +10,6 @@
 
 enum class BalanceFactor {
   LEFT_HEAVY = -1,
-  BALANCED = 0,
   RIGHT_HEAVY = 1
 };
 
@@ -72,10 +71,61 @@ class AVL {
     return this->_root;
   }
 
+  // Find a given value
+  node_type *find(node_type *node, const value_type &value) const {
+    if (node == NULL) {
+      return NULL;
+    }
 
-// ********************************************************************************************
-// ********************************************************************************************
-// *************************************** Member variables ***********************************
+    if (this->_comp(value, node->data)) {
+      return find(node->left, value);
+    } else if (this->_comp(node->data, value)) {
+      return find(node->right, value);
+    } else {
+      return node;
+    }
+  }
+
+  // Return the next of a given node
+  node_type *next(node_type *node) const {
+    if (node == NULL) {
+      return NULL;
+    }
+
+    if (node->right != NULL) {
+      return min(node->right);
+    }
+
+    node_type *parent = node->parent;
+    while (parent != NULL && node == parent->right) {
+      node = parent;
+      parent = parent->parent;
+    }
+    return parent;
+  }
+
+  // Return the previous of a given node
+  node_type *prev(node_type *node) const {
+    if (node == NULL) {
+      return NULL;
+    }
+
+    if (node->left != NULL) {
+      return max(node->left);
+    }
+
+    node_type *parent = node->parent;
+    while (parent != NULL && node == parent->left) {
+      node = parent;
+      parent = parent->parent;
+    }
+    return parent;
+  }
+
+
+  // ********************************************************************************************
+  // ********************************************************************************************
+  // *************************************** Member variables ***********************************
  private:
 
   key_compare _comp;
@@ -84,9 +134,9 @@ class AVL {
 
   allocator_type _alloc;
 
-// ********************************************************************************************
-// ********************************************************************************************
-// *************************************** Member Functions ***********************************
+  // ********************************************************************************************
+  // ********************************************************************************************
+  // *************************************** Member Functions ***********************************
 
   // Get the height of a given node
   int getNodeHeight(node_pointer node) {
@@ -191,6 +241,34 @@ class AVL {
 
     // Balance the tree if it is unbalanced
     return balance(node, value);
+  }
+
+  // Find minimum value in the tree
+  // basically the left most node
+  node_type *minNode(node_type *node) const {
+    if (node == NULL) {
+      return NULL;
+    }
+
+    if (node->left == NULL) {
+      return node;
+    }
+
+    return minNode(node->left);
+  }
+
+  // Find maximum value in the tree
+  // basically the right most node
+  node_type *maxNode(node_type *node) const {
+    if (node == NULL) {
+      return NULL;
+    }
+
+    if (node->right == NULL) {
+      return node;
+    }
+
+    return maxNode(node->right);
   }
 
 };
