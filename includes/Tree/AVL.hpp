@@ -8,7 +8,7 @@
 #include <cstddef>
 #include "Node.hpp"
 
-enum class BalanceFactor {
+enum BalanceFactor {
   LEFT_HEAVY = -1,
   RIGHT_HEAVY = 1
 };
@@ -20,10 +20,10 @@ template<
     class allocator
 >
 class AVL {
+ public:
   // *********************************************************************************************
   // *********************************************************************************************
   // *************************************** Member types ****************************************
- public:
   typedef T value_type;
 
   typedef Node<value_type, allocator> node_type;
@@ -37,7 +37,6 @@ class AVL {
   // ********************************************************************************************
   // ********************************************************************************************
   // *************************************** Member functions ***********************************
- public:
   AVL() : _root(NULL) {}
 
   AVL(AVL &other) : _root(NULL) {
@@ -165,12 +164,10 @@ class AVL {
     return balance(node, value);
   }
 
-
-
+ private:
   // ********************************************************************************************
   // ********************************************************************************************
   // *************************************** Member variables ***********************************
- private:
 
   key_compare _comp;
 
@@ -238,23 +235,23 @@ class AVL {
       int rightHeight = getNodeHeight(node->right);
 
       if (leftHeight - rightHeight > 1) {
-        return BalanceFactor::LEFT_HEAVY;
+        return LEFT_HEAVY;
       } else if (rightHeight - leftHeight > 1) {
-        return BalanceFactor::RIGHT_HEAVY;
+        return RIGHT_HEAVY;
       }
     }
   }
 
   // Balance a branch of a given node
   node_type *balance(node_type *node, const value_type &value) {
-    if (unbalancedTree(node) == BalanceFactor::LEFT_HEAVY) {
+    if (unbalancedTree(node) == LEFT_HEAVY) {
       if (_comp(value, node->left->value)) {
         node = rotateRight(node);
       } else {
         node->left = rotateLeft(node->left);
         node = rotateRight(node);
       }
-    } else if (unbalancedTree(node) == BalanceFactor::RIGHT_HEAVY) {
+    } else if (unbalancedTree(node) == RIGHT_HEAVY) {
       if (_comp(node->right->value, value)) {
         node = rotateLeft(node);
       } else {
