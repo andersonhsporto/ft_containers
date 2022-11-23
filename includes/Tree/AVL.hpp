@@ -97,6 +97,7 @@ class AVL {
     }
 
     node_type *parent = node->parent;
+
     while (parent != NULL && node == parent->right) {
       node = parent;
       parent = parent->parent;
@@ -121,6 +122,49 @@ class AVL {
     }
     return parent;
   }
+
+  // Erase the root node
+  bool eraseRoot(value_type &value) {
+    if (find(this->_root, value) == NULL) {
+      return false;
+    } else {
+      this->_root = eraseNode(this->_root, value);
+      return true;
+    }
+  }
+
+  // Erase a given node from last to the root node
+  node_type *eraseNode(node_type *node, const value_type &value) {
+    if (node == NULL) {
+      return node;
+    }
+
+    if (this->_comp(value, node->data)) {
+      node->left = eraseNode(node->left, value);
+    } else if (this->_comp(node->data, value)) {
+      node->right = eraseNode(node->right, value);
+    } else {
+      if (node->left == NULL || node->right == NULL) {
+        node_type *temp = node->left ? node->left : node->right;
+
+        if (temp == NULL) {
+          temp = node;
+          node = NULL;
+        } else {
+          *node = *temp;
+        }
+        _alloc.deallocate(temp, 1);
+
+      } else {
+        node_type *temp = min(node->right);
+
+        node->data = temp->data;
+        node->right = eraseNode(node->right, temp->data);
+      }
+    }
+    return balance(node, value);
+  }
+
 
 
   // ********************************************************************************************
