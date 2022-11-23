@@ -19,15 +19,15 @@ class BidirectionalIterator {
   // *************************************** Member types *****************************************
  public:
 
-  typedef std::ptrdiff_t difference_type;
+//  typedef std::ptrdiff_t difference_type;
+
+//  typedef std::bidirectional_iterator_tag iterator_category;
 
   typedef T value_type;
 
   typedef T *pointer;
 
   typedef T &reference;
-
-  typedef std::bidirectional_iterator_tag iterator_category;
 
   typedef Node<value_type, allocator> node_type;
 
@@ -36,7 +36,6 @@ class BidirectionalIterator {
   // *********************************************************************************************
   // *********************************************************************************************
   // *************************************** Member functions ************************************
- public:
   BidirectionalIterator() : _ptr(NULL) {}
 
   BidirectionalIterator(pointer ptr, const_avl *avl) : _ptr(ptr), _avl(avl) {}
@@ -53,6 +52,55 @@ class BidirectionalIterator {
 
   ~BidirectionalIterator() {}
 
+  // *********************************************************************************************
+  // *********************************************************************************************
+  // *************************************** Member Operators ************************************
+
+  bool operator==(const BidirectionalIterator &other) const {
+    return this->_ptr == other._ptr;
+  }
+
+  bool operator!=(const BidirectionalIterator &other) const {
+    return this->_ptr != other._ptr;
+  }
+
+  reference operator*() const {
+    return *this->_ptr;
+  }
+
+  pointer operator->() const {
+    return this->_ptr;
+  }
+
+  BidirectionalIterator &operator++() {
+    node_type *node = this->_avl->find(this->_ptr);
+
+    if (node) {
+      _ptr = this->_avl->next(node)->data;
+    }
+    return *this;
+  }
+
+  BidirectionalIterator operator++(int) {
+    BidirectionalIterator tmp(*this);
+    ++(*this);
+    return tmp;
+  }
+
+  BidirectionalIterator &operator--() { //TODO: Check if it is correct
+    node_type *node = this->_avl->find(this->_ptr);
+
+    if (node) {
+      _ptr = this->_avl->prev(node)->data;
+    }
+    return *this;
+  }
+
+  BidirectionalIterator operator--(int) {
+    BidirectionalIterator tmp(*this);
+    --(*this);
+    return tmp;
+  }
 
   // *********************************************************************************************
   // *********************************************************************************************
