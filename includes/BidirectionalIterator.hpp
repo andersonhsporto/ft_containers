@@ -83,6 +83,7 @@ class BidirectionalIterator {
 
   BidirectionalIterator operator++(int) {
     BidirectionalIterator tmp(*this);
+
     ++(*this);
     return tmp;
   }
@@ -98,6 +99,7 @@ class BidirectionalIterator {
 
   BidirectionalIterator operator--(int) {
     BidirectionalIterator tmp(*this);
+
     --(*this);
     return tmp;
   }
