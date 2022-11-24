@@ -9,7 +9,7 @@
 #include "pair.hpp"
 #include "./Tree/AVL.hpp" // TODO: Simplify this
 #include "BidirectionalIterator.hpp"
-#include "IteratorVector.hpp"
+#include "Iterators/IteratorVector.hpp"
 
 namespace ft {
 template<
@@ -252,7 +252,7 @@ class map {
    * Any past-the-end iterator remains valid.
   */
   void clear() {
-    _avl.clear();
+//    _avl.eraseRoot();
     _size = 0;
   }
 
@@ -324,8 +324,13 @@ class map {
   // Exchanges the contents of the container with those of another container.
   // Does not invoke any move, copy, or swap operations on individual elements.
   void swap(map &other) {
-    ft::swap(_avl, other._avl);
-    ft::swap(_size, other._size);
+    map temp;
+
+    temp = *this;
+    *this = other;
+    other = temp;
+
+    temp.clear();
   }
 
   // ***********************************************************************************************

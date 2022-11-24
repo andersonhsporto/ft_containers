@@ -17,14 +17,19 @@ int main() {
 }
 
 #include <map>
+#include "map.hpp"
 
 void testFtMap() {
 
-  std::map<int, int> map;
+  ft::map<int, int> map;
 
-  map.insert(std::pair<int, int>(1, 1));
-  map.insert(std::pair<int, int>(2, 2));
+//  map.insert(std::pair<int, int>(4, 4));
+//  map.insert(std::pair<int, int>(2, 2));
+//    map.insert(std::pair<int, int>(6, 6));
 
-  std::cout << map[1] << std::endl;
+  std::cout << "map begin iterator: " << map.begin()->first << std::endl;
+  std::cout << "map end iterator: " << map.end()->first << std::endl;
 }
+
+
 

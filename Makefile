@@ -2,19 +2,24 @@ NAME	= test
 
 CC		= c++
 CFLAGS	= -Wall -Wextra -std=c++98 -g -Wshadow #-Werror
-INCLUDE = -I ./includes -I ./includes/Tree
+INCLUDE =	-I ./includes \
+			-I ./includes/Tree \
+			-I ./includes/Iterators
 
 MAIN_HEADERS	= $(addprefix ./includes/, \
-					BidirectionalIterator.hpp \
 					Colors.hpp \
 					ft_algorithm.hpp \
 					ft_iterator_base.hpp \
 					ft_iterator_types.hpp \
-					IteratorVector.hpp \
 					map.hpp \
 					pair.hpp \
 					testsVector.hpp \
 					vector.hpp \
+					)
+
+ITERATORS_HEADERS	= $(addprefix ./includes/Iterators/, \
+					BidirectionalIterator.hpp \
+					IteratorVector.hpp \
 					)
 
 TREE_HEADERS	= $(addprefix ./includes/Tree/, \
@@ -27,7 +32,7 @@ SRC		= $(addprefix ./src/, \
           	testsVectorFT.cpp \
 			)
 
-%.o: %.cpp $(HEADERS) $(TREE_HEADERS)
+%.o: %.cpp $(MAIN_HEADERS) $(TREE_HEADERS) $(ITERATORS_HEADERS)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $(<:%.cpp=%.o)
 
 OBJ		= $(SRC:%.cpp=%.o)
