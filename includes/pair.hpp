@@ -2,8 +2,8 @@
 // Created by Anderson Porto on 11/5/22.
 //
 
-#ifndef FT_CONTAINERS_FT_UTILITY_HPP
-#define FT_CONTAINERS_FT_UTILITY_HPP
+#ifndef FT_CONTAINERS_PAIR_HPP
+#define FT_CONTAINERS_PAIR_HPP
 
 namespace ft {
 template<class T1, class T2>
@@ -78,4 +78,4 @@ pair<T1, T2> make_pair(T1 x, T2 y) {
 
 }
 
-#endif //FT_CONTAINERS_FT_UTILITY_HPP
+#endif //FT_CONTAINERS_PAIR_HPP
