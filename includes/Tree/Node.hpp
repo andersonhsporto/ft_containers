@@ -22,9 +22,9 @@ struct Node {
 
   Node() : left(0), right(0), parent(0), data(0), height(0) {}
 
-  explicit Node(const T &data) : left(0), right(0), parent(0), data(0), height(0) {
-    this->data = alloc.allocate(1);
-    alloc.construct(this->data, data);
+  explicit Node(const T &value) : left(0), right(0), parent(0), data(0), height(0) {
+    data = alloc.allocate(1);
+    alloc.construct(data, value);
   }
 
   Node &operator=(const Node &other) {
