@@ -38,9 +38,11 @@ class BidirectionalIterator {
   // *************************************** Member functions ************************************
   BidirectionalIterator() : _ptr(NULL) {}
 
-  BidirectionalIterator(pointer ptr, const_avl *avl) : _ptr(ptr), _avl(avl) {}
+  explicit BidirectionalIterator(pointer ptr, const_avl *avl = NULL) : _ptr(ptr), _avl(avl) {}
 
-  BidirectionalIterator(const BidirectionalIterator &copy) : _ptr(copy._ptr), _avl(copy._avl) {}
+  BidirectionalIterator(const BidirectionalIterator &copy) {
+    *this = copy;
+  }
 
   BidirectionalIterator &operator=(const BidirectionalIterator &other) {
     if (this != &other) {
@@ -55,6 +57,16 @@ class BidirectionalIterator {
   // *********************************************************************************************
   // *********************************************************************************************
   // *************************************** Member Operators ************************************
+
+  operator BidirectionalIterator<const T, compare, allocator>() const {
+    return BidirectionalIterator<const T, compare, allocator>(_ptr,
+                                                              reinterpret_cast<
+                                                              AVL<const T,
+                                                              compare,
+                                                              allocator>
+                                                              *>(_avl));
+  }
+
 
   bool operator==(const BidirectionalIterator &other) const {
     return this->_ptr == other._ptr;
