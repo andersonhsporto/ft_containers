@@ -212,9 +212,247 @@ class map {
     return const_reverse_iterator(end());
   }
 
+  // Returns a reverse iterator to the element following the last element in the reversed container.
+  reverse_iterator rend() {
+    return reverse_iterator(begin());
+  }
 
+  // Returns a reverse iterator to the element following the last element in the reversed container.
+  const_reverse_iterator rend() const {
+    return const_reverse_iterator(begin());
+  }
 
+  // ***********************************************************************************************
+  // ***********************************************************************************************
+  // *************************************** Capacity **********************************************
 
+  // Returns whether the map is empty (i.e. whether its size is 0).
+  bool empty() const {
+    return _size == 0;
+  }
+
+  // Returns the number of elements in the map.
+  size_type size() const {
+    return _size;
+  }
+
+  // Returns the maximum number of elements that the map can hold.
+  size_type max_size() const {
+    return _alloc.max_size();
+  }
+
+  // ***********************************************************************************************
+  // ***********************************************************************************************
+  // *************************************** Modifiers *********************************************
+
+  /*  Erases all elements from the container. After this call, size() returns zero.
+   * Invalidates any references, pointers, or iterators referring to contained elements.
+   * Any past-the-end iterator remains valid.
+  */
+  void clear() {
+    _avl.clear();
+    _size = 0;
+  }
+
+  /*  Inserts an element into the container, if the container doesn't already contain an element
+   *  with an equivalent key.
+   *  An iterator that points to the newly inserted element is returned.
+   *  If the insertion is successful, this new element is constructed in-place using args as the
+   *  arguments for its construction.
+   *  If the container already contains an element with an equivalent key, the function has no
+   *  effect.
+   *  An iterator to the element with an equivalent key to key in the container is returned.
+   *  If the container does not contain an element with an equivalent key, the function
+   *  inserts a new element with that key and returns an iterator to this new element.
+   *  Notice that this always increases the container size by one, even if no insertion was
+   *  performed.
+   */
+  ft::pair<iterator, bool> insert(const value_type &value) {
+    Node<value_type, allocator_type> *node = _avl.insert(value);
+
+    if (node == NULL) {
+      return ft::make_pair(iterator(NULL, &_avl), false);
+    } else {
+      ++_size;
+      return ft::make_pair(iterator(node->data, &_avl), true);
+    }
+  }
+
+  // Inserts elements from range [first, last).
+  // If multiple elements in the range have keys that compare equivalent,
+  // it is unspecified which element is inserted.
+  template<class InputIterator>
+  void insert(InputIterator first, InputIterator last) {
+    while (first != last) {
+      insert(*first);
+      ++first;
+    }
+  }
+
+  // Removes specified elements from the container.
+  // removes the element at pos.
+  iterator erase(iterator position) {
+    Node<value_type, allocator_type> *node = _avl.find(*position);
+
+    if (node == NULL) {
+      return iterator(NULL, &_avl);
+    }
+
+    _avl.erase(node->data);
+    --_size;
+
+    return iterator(node->data, &_avl);
+  }
+
+  // Removes the element (if one exists) with the key equivalent to key.
+  size_type erase(const key_type &key) {
+    value_type value = ft::make_pair(key, mapped_type());
+    Node<value_type, allocator_type> *node = _avl.find(value);
+
+    if (node == NULL) {
+      return 0;
+    }
+
+    _avl.erase(node->data);
+    --_size;
+
+    return 1;
+  }
+
+  // Exchanges the contents of the container with those of another container.
+  // Does not invoke any move, copy, or swap operations on individual elements.
+  void swap(map &other) {
+    ft::swap(_avl, other._avl);
+    ft::swap(_size, other._size);
+  }
+
+  // ***********************************************************************************************
+  // ***********************************************************************************************
+  // *************************************** Lookup ************************************************
+
+  // Returns the number of elements with key that compares equivalent to the specified argument.
+  // This is either 1 or 0 since this container does not allow duplicates.
+  size_type count(const key_type &key) const {
+    value_type value = ft::make_pair(key, mapped_type());
+    Node<value_type, allocator_type> *node = _avl.find(value);
+
+    if (node == NULL) {
+      return 0;
+    } else {
+      return 1;
+    }
+  }
+
+  // Finds an element with key equivalent to key.
+  iterator find(const key_type &key) {
+    value_type value = ft::make_pair(key, mapped_type());
+    Node<value_type, allocator_type> *node = _avl.find(value);
+
+    if (node == NULL) {
+      return iterator(NULL, &_avl);
+    } else {
+      return iterator(node->data, &_avl);
+    }
+  }
+
+  // Finds an element with key equivalent to key.
+  const_iterator find(const key_type &key) const {
+    value_type value = ft::make_pair(key, mapped_type());
+    Node<value_type, allocator_type> *node = _avl.find(value);
+
+    if (node == NULL) {
+      return const_iterator(NULL, &_avl);
+    } else {
+      return const_iterator(node->data, &_avl);
+    }
+  }
+
+  // Returns a range containing all elements with the given key in the container.
+  // The range is defined by two iterators, one pointing to the first element
+  // that is not less than key and another pointing to the first element greater than key.
+  // ( Compares the keys to key ).
+  ft::pair<iterator, iterator> equal_range(const key_type &key) {
+    iterator it = find(key);
+
+    if (it == end()) {
+      return ft::make_pair(it, it);
+    } else {
+      return ft::make_pair(it, ++it);
+    }
+  }
+
+  // Returns a range containing all elements with the given key in the container.
+  // The range is defined by two iterators, one pointing to the first element
+  // that is not less than key and another pointing to the first element greater than key.
+  // ( Compares the keys to key ).
+  ft::pair<const_iterator, const_iterator> equal_range(const key_type &key) const {
+    const_iterator it = find(key);
+
+    if (it == end()) {
+      return ft::make_pair(it, it);
+    } else {
+      return ft::make_pair(it, ++it);
+    }
+  }
+
+  // Returns an iterator pointing to the first element
+  // that is not less than (i.e. greater or equal to) key.
+  iterator lower_bound(const key_type &key) {
+    iterator it = find(key);
+
+    if (it == end()) {
+      return it;
+    } else {
+      return it;
+    }
+  }
+
+  // Returns an iterator pointing to the first element
+  // that is not less than (i.e. greater or equal to) key.
+  const_iterator lower_bound(const key_type &key) const {
+    const_iterator it = find(key);
+
+    if (it == end()) {
+      return it;
+    } else {
+      return it;
+    }
+  }
+
+  // Returns an iterator pointing to the first element that is greater than key.
+  iterator upper_bound(const key_type &key) {
+    iterator it = find(key);
+
+    if (it == end()) {
+      return it;
+    } else {
+      return ++it;
+    }
+  }
+
+  // Returns an iterator pointing to the first element that is greater than key.
+  const_iterator upper_bound(const key_type &key) const {
+    const_iterator it = find(key);
+
+    if (it == end()) {
+      return it;
+    } else {
+      return ++it;
+    }
+  }
+// ***********************************************************************************************
+// ***********************************************************************************************
+// *************************************** Observers **********************************************
+
+  // Returns the comparison object out of which the container was constructed.
+  key_compare key_comp() const {
+    return _avl.key_comp();
+  }
+
+  // Returns the comparison object out of which the container was constructed.
+  value_compare value_comp() const {
+    return _avl.value_comp();
+  }
 
 // ***********************************************************************************************
 // ***********************************************************************************************
