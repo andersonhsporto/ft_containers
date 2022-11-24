@@ -10,9 +10,9 @@ MAIN_HEADERS	= $(addprefix ./includes/, \
 					ft_algorithm.hpp \
 					ft_iterator_base.hpp \
 					ft_iterator_types.hpp \
-					ft_utility.hpp \
 					IteratorVector.hpp \
 					map.hpp \
+					pair.hpp \
 					testsVector.hpp \
 					vector.hpp \
 					)
