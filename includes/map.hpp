@@ -83,9 +83,7 @@ class map {
                const allocator_type &alloc = allocator_type()) :
       _alloc(alloc),
       _comp(comp),
-      _size(0) {
-
-  }
+      _size(0) {}
 
   // Range Constructor ( constructs container with as copies of elements from range [first,last) )
   template<class InputIterator>
@@ -109,13 +107,17 @@ class map {
 
   // Assignment Operator ( assigns new contents to container, replacing its current contents )
   map &operator=(const map &source) {
-    // TODO: Use member functions
+    if (this != &source) {
+      clear();
+      _avl = source._avl;
+      _size = source._size;
+    }
     return *this;
   }
 
   // Destructor
   ~map() {
-    // TODO: Use member functions
+    clear();
   }
 
   // Returns the associated allocator
@@ -446,7 +448,7 @@ class map {
 
   // Returns the comparison object out of which the container was constructed.
   key_compare key_comp() const {
-    return _avl.key_comp();
+    return _comp;
   }
 
   // Returns the comparison object out of which the container was constructed.
@@ -468,6 +470,53 @@ class map {
   size_type _size;
 
 };
+
+// ***********************************************************************************************
+// ***********************************************************************************************
+// *************************************** Non-member functions **********************************
+template<class Key, class T, class Compare, class Alloc>
+bool operator==(const std::map<Key, T, Compare, Alloc> &lhs,
+                const std::map<Key, T, Compare, Alloc> &rhs) {
+  return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 }
+
+template<class Key, class T, class Compare, class Alloc>
+bool operator!=(const std::map<Key, T, Compare, Alloc> &lhs,
+                const std::map<Key, T, Compare, Alloc> &rhs) {
+  return !ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+}
+
+template<class Key, class T, class Compare, class Alloc>
+bool operator<(const std::map<Key, T, Compare, Alloc> &lhs,
+               const std::map<Key, T, Compare, Alloc> &rhs) {
+  return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+}
+
+template<class Key, class T, class Compare, class Alloc>
+bool operator<=(const std::map<Key, T, Compare, Alloc> &lhs,
+                const std::map<Key, T, Compare, Alloc> &rhs) {
+  return !(rhs < lhs);
+}
+
+template<class Key, class T, class Compare, class Alloc>
+
+bool operator>(const std::map<Key, T, Compare, Alloc> &lhs,
+               const std::map<Key, T, Compare, Alloc> &rhs) {
+  return ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
+}
+
+template<class Key, class T, class Compare, class Alloc>
+
+bool operator>=(const std::map<Key, T, Compare, Alloc> &lhs,
+                const std::map<Key, T, Compare, Alloc> &rhs) {
+  return !(lhs < rhs);
+}
+
+template<class Key, class T, class Compare, class Alloc>
+void swap(std::map<Key, T, Compare, Alloc> &lhs,
+          std::map<Key, T, Compare, Alloc> &rhs) {
+  lhs.swap(rhs);
+}
+};
 
 #endif //FT_CONTAINERS_MAP_HPP
