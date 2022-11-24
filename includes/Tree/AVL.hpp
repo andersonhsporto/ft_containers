@@ -164,6 +164,35 @@ class AVL {
     return balance(node, value);
   }
 
+  // Find minimum value in the tree
+  // basically the left most node
+  node_type *minNode(node_type *node) const {
+    if (node == NULL) {
+      return NULL;
+    }
+
+    if (node->left == NULL) {
+      return node;
+    }
+
+    return minNode(node->left);
+  }
+
+  // Find maximum value in the tree
+  // basically the right most node
+  node_type *maxNode(node_type *node) const {
+    if (node == NULL) {
+      return NULL;
+    }
+
+    if (node->right == NULL) {
+      return node;
+    }
+
+    return maxNode(node->right);
+  }
+
+  node_type *_root;
  private:
   // ********************************************************************************************
   // ********************************************************************************************
@@ -171,7 +200,6 @@ class AVL {
 
   key_compare _comp;
 
-  node_type *_root;
 
   allocator_type _alloc;
 
@@ -282,34 +310,6 @@ class AVL {
 
     // Balance the tree if it is unbalanced
     return balance(node, value);
-  }
-
-  // Find minimum value in the tree
-  // basically the left most node
-  node_type *minNode(node_type *node) const {
-    if (node == NULL) {
-      return NULL;
-    }
-
-    if (node->left == NULL) {
-      return node;
-    }
-
-    return minNode(node->left);
-  }
-
-  // Find maximum value in the tree
-  // basically the right most node
-  node_type *maxNode(node_type *node) const {
-    if (node == NULL) {
-      return NULL;
-    }
-
-    if (node->right == NULL) {
-      return node;
-    }
-
-    return maxNode(node->right);
   }
 
 };
