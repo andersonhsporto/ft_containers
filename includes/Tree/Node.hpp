@@ -8,6 +8,8 @@
 namespace ft {
 template<typename T, class allocator>
 struct Node {
+  allocator default_allocator;
+
   Node *left;
 
   Node *right;
@@ -18,30 +20,29 @@ struct Node {
 
   int height;
 
-  allocator alloc;
-
+  // Default Constructor
   Node() : left(0), right(0), parent(0), data(0), height(0) {}
 
-  explicit Node(const T &value) : left(0), right(0), parent(0), data(0), height(0) {
-    data = alloc.allocate(1);
-    alloc.construct(data, value);
+  // Copy Constructor
+  explicit Node(const T &value) : left(0), right(0), parent(0), data(0), height(1) {
+    data = default_allocator.allocate(1);
+    default_allocator.construct(data, value);
   }
 
+  // Assignment Operator
   Node &operator=(const Node &other) {
     if (this != &other) {
       this->left = other.left;
       this->right = other.right;
       this->parent = other.parent;
-      this->data = other.data;
-      this->height = other.height;
+      this->data = default_allocator.allocate(1);
+      default_allocator.construct(this->data, *other.data);
     }
     return *this;
   }
 
-  ~Node() {
-    alloc.destroy(data); // TODO: check if this is correct
-    alloc.deallocate(data, 1);
-  }
+  // Destructor
+  ~Node() {  }
 
 };
 }

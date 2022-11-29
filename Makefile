@@ -14,8 +14,8 @@ CFLAGS	= -Wall -Wextra -std=c++98 -g -Wshadow #-Werror
 INCLUDE =	$(addprefix -I ./includes, \
 			/ \
 			/0-Utilities \
+			/1-Iterators \
 			/Tree \
-			/Iterators \
 			)
 
 ####################################################################################################
@@ -26,8 +26,8 @@ MAIN_HEADERS	= $(addprefix ./includes/, \
 					ft_algorithm.hpp \
 					ft_iterator_base.hpp \
 					ft_iterator_types.hpp \
+					ft_pair.hpp \
 					map.hpp \
-					pair.hpp \
 					vector.hpp \
 					)
 
@@ -36,7 +36,7 @@ UTILS_HEADERS	= $(addprefix ./includes/0-Utilities/, \
 					testsVector.hpp \
 					)
 
-ITERATORS_HEADERS	= $(addprefix ./includes/Iterators/, \
+ITERATORS_HEADERS	= $(addprefix ./includes/1-Iterators/, \
 					BidirectionalIterator.hpp \
 					IteratorVector.hpp \
 					)
