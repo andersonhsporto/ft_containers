@@ -15,7 +15,7 @@ INCLUDE =	$(addprefix -I ./includes, \
 			/ \
 			/0-Utilities \
 			/1-Iterators \
-			/Tree \
+			/2-Tree \
 			)
 
 ####################################################################################################
@@ -41,7 +41,7 @@ ITERATORS_HEADERS	= $(addprefix ./includes/1-Iterators/, \
 					IteratorVector.hpp \
 					)
 
-TREE_HEADERS	= $(addprefix ./includes/Tree/, \
+TREE_HEADERS	= $(addprefix ./includes/2-Tree/, \
 					AVL.hpp \
 					Node.hpp \
 					)

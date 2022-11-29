@@ -5,7 +5,7 @@
 #ifndef FT_CONTAINERS_VECTOR_HPP
 #define FT_CONTAINERS_VECTOR_HPP
 
-#include "Iterators/IteratorVector.hpp"
+#include "1-Iterators/IteratorVector.hpp"
 #include "ft_iterator_types.hpp"
 #include "ft_algorithm.hpp"
 
@@ -197,7 +197,7 @@ class vector {
 
   // ***********************************************************************************************
   // ***********************************************************************************************
-  // ****************************************** Iterators ******************************************
+  // ****************************************** 1-Iterators ******************************************
 
   // Returns an iterator to the beginning
   iterator begin() {
