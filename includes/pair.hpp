@@ -23,7 +23,7 @@ struct pair {
   template<class U, class V>
   pair(const pair<U, V> &pr) : first(pr.first), second(pr.second) {}
 
-  pair &operator=(const pair &pr) {
+  pair &operator=(pair const &pr) {
     first = pr.first;
     second = pr.second;
     return *this;
@@ -73,7 +73,7 @@ bool operator>=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs) {
 
 template<class T1, class T2>
 pair<T1, T2> make_pair(T1 x, T2 y) {
-  return pair < T1, T2 > (x, y);
+  return pair<T1, T2>(x, y);
 }
 
 }

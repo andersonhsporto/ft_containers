@@ -7,8 +7,8 @@
 
 #include <memory>
 #include "pair.hpp"
-#include "./Tree/AVL.hpp" // TODO: Simplify this
-#include "BidirectionalIterator.hpp"
+#include "Tree/AVL.hpp" // TODO: Simplify this
+#include "Iterators/BidirectionalIterator.hpp"
 #include "Iterators/IteratorVector.hpp"
 
 namespace ft {
@@ -83,7 +83,8 @@ class map {
                const allocator_type &alloc = allocator_type()) :
       _alloc(alloc),
       _comp(comp),
-      _size(0) {}
+      _size(0) {
+  }
 
   // Range Constructor ( constructs container with as copies of elements from range [first,last) )
   template<class InputIterator>
@@ -178,19 +179,19 @@ class map {
 
   // Returns an iterator to the first element in the container.
   iterator begin() {
-    if (_avl._root == NULL) {
+    if (_avl.root == NULL) {
       return iterator(NULL, &_avl);
     } else {
-      return iterator(_avl.minNode(_avl._root)->data, &_avl);
+      return iterator(_avl.minNode(_avl.root)->data, &_avl);
     }
   }
 
   // Returns an iterator to the first element in the container.
   const_iterator begin() const {
-    if (_avl._root == NULL) {
+    if (_avl.root == NULL) {
       return const_iterator(NULL, &_avl);
     } else {
-      return const_iterator(_avl.minNode(_avl._root)->data, &_avl);
+      return const_iterator(_avl.minNode(_avl.root)->data, &_avl);
     }
   }
 
@@ -256,27 +257,15 @@ class map {
     _size = 0;
   }
 
-  /*  Inserts an element into the container, if the container doesn't already contain an element
-   *  with an equivalent key.
-   *  An iterator that points to the newly inserted element is returned.
-   *  If the insertion is successful, this new element is constructed in-place using args as the
-   *  arguments for its construction.
-   *  If the container already contains an element with an equivalent key, the function has no
-   *  effect.
-   *  An iterator to the element with an equivalent key to key in the container is returned.
-   *  If the container does not contain an element with an equivalent key, the function
-   *  inserts a new element with that key and returns an iterator to this new element.
-   *  Notice that this always increases the container size by one, even if no insertion was
-   *  performed.
-   */
   ft::pair<iterator, bool> insert(const value_type &value) {
-    Node<value_type, allocator_type> *node = _avl.insert(value);
+    Node<value_type, allocator_type> *node = _avl.find(_avl.root, value);
 
-    if (node == NULL) {
-      return ft::make_pair(iterator(NULL, &_avl), false);
+    if (node == false) {
+      node = _avl.insert(value);
+      _size++;
+      return ft::make_pair<iterator, bool>(iterator(node->data, &_avl), true);
     } else {
-      ++_size;
-      return ft::make_pair(iterator(node->data, &_avl), true);
+      return ft::make_pair<iterator, bool>(iterator(node->data, &_avl), false);
     }
   }
 
