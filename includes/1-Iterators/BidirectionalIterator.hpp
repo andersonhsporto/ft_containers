@@ -5,8 +5,8 @@
 #ifndef FT_CONTAINERS_BIDIRECTIONALITERATOR_HPP
 #define FT_CONTAINERS_BIDIRECTIONALITERATOR_HPP
 
-#include "ft_iterator_base.hpp"
 #include "2-Tree/Tree.hpp"
+#include "ft_iterator_base.hpp"
 
 namespace ft {
 
@@ -19,9 +19,7 @@ class BidirectionalIterator {
   // *************************************** Member types *****************************************
  public:
 
-//  typedef std::ptrdiff_t difference_type;
-
-//  typedef std::bidirectional_iterator_tag iterator_category;
+  typedef std::ptrdiff_t difference_type;
 
   typedef T value_type;
 
@@ -30,6 +28,8 @@ class BidirectionalIterator {
   typedef T &reference;
 
   typedef Node<value_type, allocator> node_type;
+
+  typedef std::bidirectional_iterator_tag iterator_category;
 
   typedef const Tree<T, compare, allocator> const_tree;
 
@@ -59,12 +59,11 @@ class BidirectionalIterator {
   // *************************************** Member Operators ************************************
 
   operator BidirectionalIterator<const T, compare, allocator>() const {
-    return BidirectionalIterator<const T, compare, allocator>(_ptr,
-                                                              reinterpret_cast<
-                                                                  Tree<const T,
-                                                                       compare,
-                                                                       allocator>
-                                                                  *>(_tree));
+    return BidirectionalIterator<const T, compare, allocator>
+        (
+        _ptr,
+        reinterpret_cast<Tree<const T, compare, allocator>*>(_tree)
+        );
   }
 
   bool operator==(const BidirectionalIterator &other) const {
