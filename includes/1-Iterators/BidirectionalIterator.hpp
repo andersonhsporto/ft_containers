@@ -6,7 +6,7 @@
 #define FT_CONTAINERS_BIDIRECTIONALITERATOR_HPP
 
 #include "ft_iterator_base.hpp"
-#include "2-Tree/AVL.hpp"
+#include "2-Tree/Tree.hpp"
 
 namespace ft {
 
@@ -31,14 +31,14 @@ class BidirectionalIterator {
 
   typedef Node<value_type, allocator> node_type;
 
-  typedef const AVL<T, compare, allocator> const_avl;
+  typedef const Tree<T, compare, allocator> const_tree;
 
   // *********************************************************************************************
   // *********************************************************************************************
   // *************************************** Member functions ************************************
   BidirectionalIterator() : _ptr(NULL) {}
 
-  explicit BidirectionalIterator(pointer ptr, const_avl *avl = NULL) : _ptr(ptr), _avl(avl) {}
+  explicit BidirectionalIterator(pointer ptr, const_tree *avl = NULL) : _ptr(ptr), _tree(avl) {}
 
   BidirectionalIterator(const BidirectionalIterator &copy) {
     *this = copy;
@@ -47,7 +47,7 @@ class BidirectionalIterator {
   BidirectionalIterator &operator=(const BidirectionalIterator &other) {
     if (this != &other) {
       this->_ptr = other._ptr;
-      this->_avl = other._avl;
+      this->_tree = other._tree;
     }
     return *this;
   }
@@ -61,12 +61,11 @@ class BidirectionalIterator {
   operator BidirectionalIterator<const T, compare, allocator>() const {
     return BidirectionalIterator<const T, compare, allocator>(_ptr,
                                                               reinterpret_cast<
-                                                              AVL<const T,
-                                                              compare,
-                                                              allocator>
-                                                              *>(_avl));
+                                                                  Tree<const T,
+                                                                       compare,
+                                                                       allocator>
+                                                                  *>(_tree));
   }
-
 
   bool operator==(const BidirectionalIterator &other) const {
     return this->_ptr == other._ptr;
@@ -85,35 +84,35 @@ class BidirectionalIterator {
   }
 
   BidirectionalIterator &operator++() {
-    node_type *node = this->_avl->find(this->_ptr);
+    node_type *node = _tree->find(_tree->root, *_ptr);
 
     if (node) {
-      _ptr = this->_avl->next(node)->data;
+      _ptr = _tree->next(*_ptr)->data;
     }
     return *this;
   }
 
   BidirectionalIterator operator++(int) {
-    BidirectionalIterator tmp(*this);
+    BidirectionalIterator temp(*this);
 
     ++(*this);
-    return tmp;
+    return temp;
   }
 
-  BidirectionalIterator &operator--() { //TODO: Check if it is correct
-    node_type *node = this->_avl->find(this->_ptr);
+  BidirectionalIterator &operator--() {
+    node_type *node = _tree->find(_tree->root, *_ptr);
 
     if (node) {
-      _ptr = this->_avl->prev(node)->data;
+      _ptr = _tree->previous(*_ptr)->data;
     }
     return *this;
   }
 
   BidirectionalIterator operator--(int) {
-    BidirectionalIterator tmp(*this);
+    BidirectionalIterator temp(*this);
 
     --(*this);
-    return tmp;
+    return temp;
   }
 
   // *********************************************************************************************
@@ -122,7 +121,7 @@ class BidirectionalIterator {
  private:
   pointer _ptr;
 
-  const_avl *_avl;
+  const_tree *_tree;
 
 };
 };
