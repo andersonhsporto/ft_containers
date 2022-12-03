@@ -56,3 +56,5 @@ vgcore*
 # Binary files
 *replace
 test
+
+/containers_test/

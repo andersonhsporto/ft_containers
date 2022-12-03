@@ -28,7 +28,6 @@ void testFtVector() {
   testVectorCompares();
 }
 
-
 void testSlowOperation() {
   std::cout << "Vector Slow Operation" << std::endl;
 

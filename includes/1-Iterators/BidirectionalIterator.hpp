@@ -58,8 +58,10 @@ class BidirectionalIterator {
   // *********************************************************************************************
   // *************************************** Member Operators ************************************
 
-  operator BidirectionalIterator<const T, compare, allocator>() const {
-    return BidirectionalIterator<const T, compare, allocator>(_ptr);
+  operator BidirectionalIterator<const T, compare, allocator>(void) const {
+    return BidirectionalIterator<const T, compare, allocator>(_ptr, reinterpret_cast<Tree<const value_type,
+                                                              compare,
+                                                              allocator> const*>(_tree));
   }
 
   bool operator==(const BidirectionalIterator &other) const {

@@ -42,7 +42,7 @@ struct Node {
   }
 
   // Destructor
-  ~Node() {  }
+  ~Node() {}
 
 };
 }

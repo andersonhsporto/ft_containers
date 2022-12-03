@@ -42,7 +42,7 @@ ITERATORS_HEADERS	= $(addprefix ./includes/1-Iterators/, \
 					)
 
 TREE_HEADERS	= $(addprefix ./includes/2-Tree/, \
-					AVL.hpp \
+					Tree.hpp \
 					Node.hpp \
 					)
 
