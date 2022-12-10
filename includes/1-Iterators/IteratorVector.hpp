@@ -5,7 +5,7 @@
 #ifndef FT_CONTAINERS_ITERATORVECTOR_HPP
 #define FT_CONTAINERS_ITERATORVECTOR_HPP
 
-#include "../ft_iterator_base.hpp"
+#include "ft_iterator_traits.hpp"
 
 namespace ft {
 

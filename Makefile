@@ -5,7 +5,7 @@ NAME	= test
 ####################################################################################################
 
 CC		= c++
-CFLAGS	= -Wall -Wextra -std=c++98 -g -Wshadow #-Werror
+CFLAGS	= -Wall -Wextra -std=c++98 -g #-Wshadow #-Werror
 
 ####################################################################################################
 ##################################### Include Folders ##############################################
@@ -15,7 +15,7 @@ INCLUDE =	$(addprefix -I ./includes, \
 			/ \
 			/0-Utilities \
 			/1-Iterators \
-			/2-Tree \
+			/3-map \
 			)
 
 ####################################################################################################
@@ -24,27 +24,30 @@ INCLUDE =	$(addprefix -I ./includes, \
 
 MAIN_HEADERS	= $(addprefix ./includes/, \
 					ft_algorithm.hpp \
-					ft_iterator_base.hpp \
 					ft_iterator_types.hpp \
-					ft_pair.hpp \
 					map.hpp \
 					vector.hpp \
 					)
 
 UTILS_HEADERS	= $(addprefix ./includes/0-Utilities/, \
 					Colors.hpp \
+					ConstEnum.hpp \
 					testsVector.hpp \
 					)
 
 ITERATORS_HEADERS	= $(addprefix ./includes/1-Iterators/, \
-					BidirectionalIterator.hpp \
+					ft_iterator_traits.hpp \
 					IteratorVector.hpp \
+					MapIterator.hpp \
 					)
 
-TREE_HEADERS	= $(addprefix ./includes/2-Tree/, \
-					Tree.hpp \
-					Node.hpp \
-					)
+MAP_HEADERS	= $(addprefix ./includes/3-map/, \
+				ft_pair.hpp \
+				map.hpp \
+				Node.hpp \
+				Tree.hpp \
+				)
+
 
 ####################################################################################################
 ########################################## Source files ############################################
@@ -59,7 +62,7 @@ SRC		= $(addprefix ./src/, \
 ########################################## Objects files ###########################################
 ####################################################################################################
 
-%.o: %.cpp $(MAIN_HEADERS) $(UTILS_HEADERS) $(TREE_HEADERS) $(ITERATORS_HEADERS)
+%.o: %.cpp $(MAIN_HEADERS) $(UTILS_HEADERS) $(ITERATORS_HEADERS) $(MAP_HEADERS)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $(<:%.cpp=%.o)
 
 OBJ		= $(SRC:%.cpp=%.o)

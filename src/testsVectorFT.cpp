@@ -3,8 +3,8 @@
 //
 
 #include "../includes/vector.hpp"
-#include "0-Utilities/Colors.hpp"
-#include "0-Utilities/testsVector.hpp"
+#include "../includes/0-Utilities/Colors.hpp"
+#include "../includes/0-Utilities/testsVector.hpp"
 
 void testFtVector() {
 
