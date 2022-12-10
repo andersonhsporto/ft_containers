@@ -23,9 +23,9 @@ struct Node {
 
   int height;
 
-  Node() : left(NULL), right(NULL), parent(NULL), data(NULL), height(0) {}
+  Node() : parent(NULL), left(NULL), right(NULL), data(NULL), height(0) {}
 
-  Node(T const &copy) : left(NULL), right(NULL), parent(NULL), height(1) {
+  Node(T const &copy) : parent(NULL), left(NULL), right(NULL),  height(1) {
     data = alloc.allocate(1);
     alloc.construct(data, copy);
   }

@@ -5,7 +5,6 @@
 #ifndef FT_CONTAINERS_TREE_HPP
 #define FT_CONTAINERS_TREE_HPP
 
-#include <algorithm>
 #include "Node.hpp"
 
 namespace ft {
@@ -217,7 +216,7 @@ struct Tree {
   }
 
   void _updateHeight(node_type *node) {
-    node->height = std::max(getHeight(node->left), getHeight(node->right)) + 1;
+    node->height = std::max(node->left->getHeight(), node->right->getHeight()) + 1;
   }
 
   void _deallocNode(node_type *node) {

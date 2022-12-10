@@ -31,7 +31,6 @@ MAIN_HEADERS	= $(addprefix ./includes/, \
 
 UTILS_HEADERS	= $(addprefix ./includes/0-Utilities/, \
 					Colors.hpp \
-					ConstEnum.hpp \
 					testsVector.hpp \
 					)
 

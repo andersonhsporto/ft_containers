@@ -8,6 +8,8 @@
 #include <cstddef>
 #include <iostream>
 
+#include "ft_iterator_traits.hpp"
+
 namespace ft {
 template<typename Iterator>
 struct iterator_traits {

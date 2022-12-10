@@ -61,9 +61,9 @@ class MapIterator {
 
   // increment and decrement (++a or a++ / --a or a--)
   MapIterator &operator++() {
-    node_type *node = _avl->find(_avl->root, *_it);
+    node_type *node = _avl->getNode(_avl->root, *_it);
     if (node) {
-      node_type *tmp = _avl->next(*_it);
+      node_type *tmp = _avl->getNextNode(*_it);
 
       if (tmp)
         _it = tmp->data;
@@ -83,11 +83,11 @@ class MapIterator {
     node_type *node = NULL;
 
     if (!_it) {
-      node = _avl->Max(_avl->root);
+      node = _avl->getMaxNode(_avl->root);
       if (node) _it = node->data;
       return (*this);
     }
-    node = _avl->find(_avl->root, *_it);
+    node = _avl->getNode(_avl->root, *_it);
     if (node) {
       node_type *tmp = _avl->previous(*_it);
       if (tmp) _it = tmp->data;

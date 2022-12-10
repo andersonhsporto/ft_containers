@@ -94,14 +94,14 @@ class map {
   map(InputIt first,
       InputIt last,
       const key_compare &comp = key_compare(),
-      const allocator_type &alloc = allocator_type()): _comp(comp), _alloc(alloc) {
+      const allocator_type &alloc = allocator_type()) {
+    _comp = comp;
+    _alloc = alloc;
     _size = 0;
     while (first != last) {
       insert(*first);
       ++first;
     }
-    _comp = comp;
-    _alloc = alloc;
   }
 
   map(const map &other) : _comp(other._comp), _alloc(other._alloc), _size(0) {
@@ -214,7 +214,7 @@ class map {
   // #############################################################################################
 
   pair<iterator, bool> insert(const value_type &value) {
-    Node<value_type, Alloc> *node = _tree.find(_tree.root, value);
+    Node<value_type, Alloc> *node = _tree.getNode(_tree.root, value);
     bool second = false;
 
     if (!node) {
@@ -231,7 +231,9 @@ class map {
   }
 
   template<class InputIt>
-  void insert(InputIt first, InputIt last) {
+  void insert(InputIt first,
+              InputIt last,
+              typename ft::enable_if<!ft::is_integral<InputIt>::value>::type * = 0) {
     while (first != last) {
       insert(*first);
       first++;
