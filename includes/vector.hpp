@@ -5,9 +5,10 @@
 #ifndef FT_CONTAINERS_VECTOR_HPP
 #define FT_CONTAINERS_VECTOR_HPP
 
-#include "1-Iterators/IteratorVector.hpp"
+#include "1-Iterators/VectorIterator.hpp"
 #include "ft_iterator_types.hpp"
 #include "ft_algorithm.hpp"
+#include "1-Iterators/ReverseIterator.hpp"
 
 namespace ft {
 template<class T, class Allocator = std::allocator<T> >
@@ -33,13 +34,13 @@ class vector {
 
   typedef typename allocator_type::const_pointer const_pointer;
 
-  typedef ft::random_access_iterator<value_type> iterator;
+  typedef ft::VectorIterator<value_type> iterator;
 
-  typedef ft::random_access_iterator<const value_type> const_iterator;
+  typedef ft::VectorIterator<const value_type> const_iterator;
 
-  typedef ft::reverse_iterator<iterator> reverse_iterator;
+  typedef ft::ReverseIterator<iterator> reverse_iterator;
 
-  typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
+  typedef ft::ReverseIterator<const_iterator> const_reverse_iterator;
 
   // ***********************************************************************************************
   // ***********************************************************************************************
