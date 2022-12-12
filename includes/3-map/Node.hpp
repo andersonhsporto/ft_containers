@@ -6,6 +6,7 @@
 #define FT_CONTAINERS_NODE_HPP
 
 namespace ft {
+
 template<typename T, class Alloc>
 struct Node {
   T *data;

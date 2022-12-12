@@ -74,3 +74,78 @@ void testRbeginIterator() {
   std::cout << "map.rbegin chave = " << it->first << std::endl;
   std::cout << "map.rbegin valor = " << it->second << std::endl;
 }
+
+void testRendIterator() {
+  ft::map<const char *, std::string> map;
+
+  map["a"] = "È a";
+  map["b"] = "È b";
+  map["c"] = "È c";
+  map["dado"] = "È dado";
+  map["hexa"] = "È hexa";
+
+  ft::map<const char *, std::string>::reverse_iterator it = map.rend();
+  ft::map<const char *, std::string>::const_reverse_iterator it2 = map.rend();
+
+  std::cout << "map.rend chave = " << it->first << std::endl;
+  std::cout << "map.rend valor = " << it->second << std::endl;
+}
+
+void testEmpty() {
+  ft::map<int, int> map;
+  ft::map<int, int> emptyMap;
+
+  map[1] = 10;
+  map[2] = 30;
+  map[3] = 50;
+  map[4] = 70;
+  map[5] = 1;
+
+  std::cout << "map.empty() = " << map.empty() << std::endl;
+  std::cout << "emptyMap.empty() = " << emptyMap.empty() << std::endl;
+}
+
+void testSize() {
+  ft::map<int, int> map;
+  ft::map<int, int> emptyMap;
+
+  for (int i = 0; i < 1042; i++) {
+    map[i] = i;
+  }
+
+  std::cout << "map.empty() = " << map.empty() << std::endl;
+  std::cout << "emptyMap.empty() = " << emptyMap.empty() << std::endl;
+}
+
+void testClear() {
+  ft::map<int, int> map;
+
+  map[1] = 10;
+  map[2] = 30;
+  map[3] = 50;
+  map[4] = 70;
+  map[5] = 1;
+
+  std::cout << "map.size() = " << map.size() << std::endl;
+  map.clear();
+  std::cout << "map.size() = " << map.size() << std::endl;
+}
+
+void testInsert() {
+  ft::map<int, int> map;
+
+  map.insert(ft::pair<int, int>(1, 10));
+  map.insert(ft::pair<int, int>(2, 30));
+  map.insert(ft::pair<int, int>(3, 50));
+  map.insert(ft::pair<int, int>(4, 70));
+  map.insert(ft::pair<int, int>(5, 1));
+
+  ft::map<int, int>::iterator it = map.begin();
+  ft::map<int, int>::const_iterator it2 = map.begin();
+
+  std::cout << "map.begin chave = " << it->first << std::endl;
+  std::cout << "map.begin valor = " << it->second << std::endl;
+
+  std::cout << "const map.begin chave = " << it2->first << std::endl;
+  std::cout << "const map.begin valor = " << it2->second << std::endl;
+}

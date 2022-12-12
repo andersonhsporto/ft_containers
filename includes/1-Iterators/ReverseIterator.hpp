@@ -29,27 +29,27 @@ class ReverseIterator {
 
   ~ReverseIterator() {}
 
-  explicit ReverseIterator(iterator_type it) : _it(it) {}
+  explicit ReverseIterator(iterator_type it) : _pointer(it) {}
 
   template<class iterator>
-  ReverseIterator(ReverseIterator<iterator> const &rev_it) {
-    _it = rev_it.base();
+  ReverseIterator(ReverseIterator<iterator> const &temp) {
+    _pointer = temp.base();
   }
 
   iterator_type base() const {
-    return (_it);
+    return (_pointer);
   }
 
   reference operator*() const {
-    return *(--Iterator(_it));
+    return *(--Iterator(_pointer));
   }
 
   ReverseIterator &operator+(difference_type value) {
-    return (ReverseIterator(_it - value));
+    return (ReverseIterator(_pointer - value));
   }
 
   ReverseIterator &operator++() {
-    _it--;
+    _pointer--;
     return (*this);
   }
 
@@ -60,16 +60,16 @@ class ReverseIterator {
   }
 
   ReverseIterator &operator+=(difference_type value) {
-    _it -= value;
+    _pointer -= value;
     return (*this);
   }
 
   ReverseIterator &operator-(difference_type value) {
-    return (ReverseIterator(_it + value));
+    return (ReverseIterator(_pointer + value));
   }
 
   ReverseIterator &operator--() {
-    _it++;
+    _pointer++;
     return (*this);
   }
 
@@ -80,7 +80,7 @@ class ReverseIterator {
   }
 
   ReverseIterator &operator-=(difference_type value) {
-    _it += value;
+    _pointer += value;
     return (*this);
   }
 
@@ -93,7 +93,7 @@ class ReverseIterator {
   }
 
  private:
-  iterator_type _it;
+  iterator_type _pointer;
 };
 
 template<class Iterator>
@@ -104,8 +104,8 @@ typename ReverseIterator<Iterator>::difference_type operator-(const ReverseItera
 
 template<class Iterator>
 typename ReverseIterator<Iterator>::difference_type operator+(typename ReverseIterator<Iterator>::difference_type n,
-                                                              const ReverseIterator<Iterator> &rev_it) {
-  return (ReverseIterator<Iterator>(rev_it.base() - n));
+                                                              const ReverseIterator<Iterator> &temp) {
+  return (ReverseIterator<Iterator>(temp.base() - n));
 }
 
 template<class Iterator>

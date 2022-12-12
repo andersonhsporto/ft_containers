@@ -6,7 +6,6 @@ namespace ft {
 template<typename T>
 class VectorIterator {
  public:
-  /*-----[ Member Types ]-----*/
   typedef std::ptrdiff_t difference_type;
 
   typedef T value_type;

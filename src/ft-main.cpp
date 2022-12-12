@@ -1,4 +1,5 @@
 #include "../includes/3-map/map.hpp"
+#include "../includes/0-Utilities/testsMap.hpp"
 #include <iostream>
 
 #include <list>
@@ -56,6 +57,8 @@ int main() {
 //
 ////
 ////  std::cout << "mp2.size() = " << mp2.size() << std::endl;
+//
+testClear();
 
   time_t end = time(NULL);
   std::cout << "Time taken by program is:\t" << end - start << " seconds" << std::endl;

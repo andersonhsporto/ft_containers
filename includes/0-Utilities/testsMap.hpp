@@ -13,4 +13,12 @@ void testBeginIterator();
 void testEndIterator();
 
 
+
+void testClear();
+
+void testInsert();
+
+void testErase();
+
+
 #endif //FT_CONTAINERS_TESTSMAP_HPP

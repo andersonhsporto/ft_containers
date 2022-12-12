@@ -5,18 +5,19 @@
 #ifndef FT_CONTAINERS_VECTOR_HPP
 #define FT_CONTAINERS_VECTOR_HPP
 
-#include "1-Iterators/VectorIterator.hpp"
-#include "ft_iterator_types.hpp"
-#include "ft_algorithm.hpp"
-#include "1-Iterators/ReverseIterator.hpp"
+#include "../1-Iterators/VectorIterator.hpp"
+#include "../1-Iterators/ReverseIterator.hpp"
+#include "../ft_iterator_types.hpp"
+#include "../ft_algorithm.hpp"
 
 namespace ft {
 template<class T, class Allocator = std::allocator<T> >
 class vector {
 
   // ***********************************************************************************************
-  // ***********************************************************************************************
   // *************************************** Member types ******************************************
+  // ***********************************************************************************************
+
  public:
   typedef Allocator allocator_type;
 
@@ -131,8 +132,9 @@ class vector {
               typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
     clear();
     reserve(last - first);
-    for (; first != last; first++) {
+    while (first != last) {
       push_back(*first);
+      first++;
     }
   }
 
@@ -143,7 +145,7 @@ class vector {
   // Access specified element with bounds checking
   reference at(size_type pos) {
     if (pos >= _size) {
-      throw std::out_of_range("Out of range");
+      throw std::out_of_range("ft::vector::at");
     }
     return _data[pos];
   }
@@ -151,7 +153,7 @@ class vector {
   // Access specified element with bounds checking (const)
   const_reference at(size_type pos) const {
     if (pos >= _size) {
-      throw std::out_of_range("Out of range");
+      throw std::out_of_range("ft::vector::at");
     }
     return _data[pos];
   }
@@ -425,10 +427,10 @@ class vector {
 
   // Swaps the contents of the container
   void swap(vector &other) {
-    std::swap(_data, other._data);
-    std::swap(_size, other._size);
-    std::swap(_capacity, other._capacity);
-    std::swap(_allocator, other._allocator);
+    _swap(_data, other._data);
+    _swap(_size, other._size);
+    _swap(_capacity, other._capacity);
+    _swap(_allocator, other._allocator);
   }
 
 // ************************************************************************************************
@@ -448,10 +450,16 @@ class vector {
 
   //  allocator object
   allocator_type _allocator;
+
+  template<typename U>
+  void _swap(U &a, U &b) {
+    U tmp = a;
+    a = b;
+    b = tmp;
+  }
+
+
 };
-
-// ************************************* Non-member functions *************************************
-
 template<class T, class Alloc>
 bool operator==(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) {
   return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));

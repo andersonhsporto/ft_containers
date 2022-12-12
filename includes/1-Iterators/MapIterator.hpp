@@ -6,6 +6,7 @@
 #define FT_CONTAINERS_MAPITERATOR_HPP
 
 #include <iterator>
+
 #include "../3-map/Tree.hpp"
 
 namespace ft {
@@ -41,27 +42,29 @@ class MapIterator {
   ~MapIterator(void) {}
 
   operator MapIterator<const T, Compare, Allocator>() const {
-    return (MapIterator<const T, Compare, Allocator>(_pointer,
-                                                            reinterpret_cast<Tree<const value_type,
-                                                                                  Compare,
-                                                                                  Allocator> const *>(_tree)));
+    return (MapIterator<const T, Compare, Allocator>(
+        _pointer, reinterpret_cast<Tree<const value_type, Compare, Allocator> const *>(_tree)));
   }
 
   bool operator==(MapIterator const &obj) {
-    return (_pointer == obj._pointer); }
+    return _pointer == obj._pointer;
+  }
 
   bool operator!=(MapIterator const &obj) {
-    return (_pointer != obj._pointer); }
+    return _pointer != obj._pointer;
+  }
 
   reference operator*() {
-    return (*_pointer); }
+    return *_pointer;
+  }
 
   pointer operator->() {
-    return (&operator*()); }
-
+    return &operator*();
+  }
 
   MapIterator &operator++() {
-    node_type *node = _tree->getNode(_tree->root, *_pointer);
+    node_type *node = _tree->find(_tree->root, *_pointer);
+
     if (node) {
       node_type *tmp = _tree->next(*_pointer);
 
@@ -84,17 +87,19 @@ class MapIterator {
     node_type *node = NULL;
 
     if (!_pointer) {
-      node = _tree->maxNode(_tree->root);
+      node = _tree->Max(_tree->root);
       if (node) _pointer = node->data;
       return (*this);
     }
-    node = _tree->getNode(_tree->root, *_pointer);
+    node = _tree->find(_tree->root, *_pointer);
     if (node) {
       node_type *tmp = _tree->previous(*_pointer);
-      if (tmp) _pointer = tmp->data;
-      else _pointer = NULL;
+      if (tmp)
+        _pointer = tmp->data;
+      else
+        _pointer = NULL;
     }
-    return (*this);
+    return *this;
   }
 
   MapIterator operator--(int) {
