@@ -60,4 +60,6 @@ void testsOperator();
 
 void testSlowOperation();
 
+void testMap();
+
 #endif //FT_CONTAINERS_TESTSMAP_HPP

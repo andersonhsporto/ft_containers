@@ -18,6 +18,30 @@ namespace ft = std;
 void testMap() {
   testElementAccess();
   testBeginIterator();
+  testEndIterator();
+  testRbeginIterator();
+  testRendIterator();
+  testConstIterator();
+  testEmpty();
+  testSize();
+  testClear();
+  testInsert();
+  testInsert_char();
+  testInsert_emplace();
+  testErase();
+  testEraseRange();
+  testSwap();
+  testCount();
+  testFind();
+  testEqualRange();
+  testEqualRange2();
+  testConstEqualRange();
+  lowerBound();
+  testUpperBound();
+  testKeyComp();
+  testValueComp();
+  testsOperator();
+  testSlowOperation();
 }
 
 void testElementAccess() {
@@ -56,6 +80,7 @@ void testBeginIterator() {
 
   std::cout << "const map.begin chave = " << it2->first << std::endl;
   std::cout << "const map.begin valor = " << it2->second << std::endl;
+  std::cout << "------------------------" << std::endl;
 }
 
 void testEndIterator() {
@@ -68,6 +93,7 @@ void testEndIterator() {
   map[5] = 1;
 
   ft::map<int, int>::iterator it = map.end();
+  std::cout << "TEST END ITERATOR" << std::endl;
   ft::map<int, int>::const_iterator it2 = map.end();
 
   std::cout << "map.end chave = " << it->first << std::endl;
@@ -75,6 +101,7 @@ void testEndIterator() {
 
   std::cout << "const map.end chave = " << it2->first << std::endl;
   std::cout << "const map.end valor = " << it2->second << std::endl;
+  std::cout << "------------------------" << std::endl;
 }
 
 void testRbeginIterator() {
@@ -93,44 +120,41 @@ void testRbeginIterator() {
   std::cout << "map.rbegin valor = " << it->second << std::endl;
   std::cout << "const map.rbegin chave = " << it2->first << std::endl;
   std::cout << "const map.rbegin valor = " << it2->second << std::endl;
+  std::cout << "------------------------" << std::endl;
 }
 
 void testRendIterator() {
-  ft::map<const char *, std::string> map;
+  ft::map<char, int> mymap;
 
-  map["a"] = "È a";
-  map["b"] = "È b";
-  map["c"] = "È c";
-  map["dado"] = "È dado";
-  map["hexa"] = "È hexa";
+  mymap['x'] = 100;
+  mymap['y'] = 200;
+  mymap['z'] = 300;
 
-  ft::map<const char *, std::string>::reverse_iterator it = map.rend();
-  ft::map<const char *, std::string>::const_reverse_iterator it2 = map.rend();
+  ft::map<char, int>::reverse_iterator rit;
 
-  std::cout << "map.rend chave = " << it->first << std::endl;
-  std::cout << "map.rend valor = " << it->second << std::endl;
-  std::cout << "const map.rend chave = " << it2->first << std::endl;
-  std::cout << "const map.rend valor = " << it2->second << std::endl;
+  for (rit = mymap.rbegin(); rit != mymap.rend(); ++rit)
+    std::cout << rit->first << " => " << rit->second << std::endl;
+
+  std::cout << "------------------------" << std::endl;
 }
 
 void testConstIterator() {
   std::cout << "TEST CONST ITERATOR" << std::endl;
-  ft::map<const char *, std::string> map;
+  ft::map<char, int> map;
 
-  map["a"] = "È a";
-  map["b"] = "È b";
-  map["c"] = "È c";
-  map["dado"] = "È dado";
-  map["hexa"] = "È hexa";
+  map['a'] = 10;
+  map['b'] = 30;
+  map['c'] = 50;
+  map['d'] = 70;
 
-  ft::map<const char *, std::string>::const_iterator it = map.begin();
-  ft::map<const char *, std::string>::const_iterator it2 = map.end();
+  ft::map<char, int>::const_iterator it = map.begin();
+  ft::map<char, int>::const_iterator ite = map.end();
 
-  std::cout << "map.begin chave = " << it->first << std::endl;
-  std::cout << "map.begin valor = " << it->second << std::endl;
+  while (it != ite) {
+    std::cout << it->first << " => " << it->second << std::endl;
+    it++;
+  }
 
-  std::cout << "map.end chave = " << it2->first << std::endl;
-  std::cout << "map.end valor = " << it2->second << std::endl;
   std::cout << "------------------------" << std::endl;
 }
 
@@ -628,10 +652,8 @@ void testsOperator() {
 void testSlowOperation() {
   ft::map<int, int> map;
 
-  for (int i = 0; i < 20000; i++) {
+  for (int i = 0; i < 5000000; i++) {
     map.insert(ft::make_pair(i, i));
   }
-  std::cout << "Tteste;\n";
-
   std::cout << "---------------------------------" << std::endl;
 }

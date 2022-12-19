@@ -228,6 +228,7 @@ class map {
 
   void clear() {
     _tree.clear();
+    _tree.root = NULL;
     _size = 0;
   }
 

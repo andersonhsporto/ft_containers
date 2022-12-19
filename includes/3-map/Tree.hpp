@@ -76,7 +76,7 @@ class Tree {
     } else
       return (node);
 
-    node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
+    _updateHeight(node);
     return (_balanceTree(node, key));
   }
 
@@ -259,8 +259,10 @@ class Tree {
     return (node);
   }
 
+
+
   /*
-   
+
     z                                y
    /  \                            /   \
   T1   y     Left Rotate(z)       z      x
@@ -271,17 +273,16 @@ class Tree {
 
   */
   node_type *_rotateLeft(node_type *z) {
-    node_type *y = z->right;
-    node_type *T2 = y->left;
+    node_type *y = z->right;        // set y
+    node_type *T2 = y->left;        // save for z->left
 
-    if (T2 != NULL)
-      T2->parent = z;
+    if (y->left != NULL)
+      y->left->parent = z;                        //	y->parent is z, everything is set to rotate
     y->left = z;
     z->right = T2;
     y->parent = z->parent;
     z->parent = y;
-
-
+    _updateHeight(z);
     _updateHeight(y);
     return (y);
   }

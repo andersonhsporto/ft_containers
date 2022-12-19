@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <map>
 #include "testsMap.hpp"
 
 int main() {
@@ -10,18 +11,7 @@ int main() {
 
   start = time(NULL);
 
-  testErase();
-  testEraseRange();
-  testSwap();
-  testCount();
-  testFind();
-  testEqualRange();
-  lowerBound();
-  testValueComp();
-  testsOperator();
-  testSlowOperation();
-
-  std::cout << "Tteste;\n";
+  testMap();
 
   end = time(NULL);
 
