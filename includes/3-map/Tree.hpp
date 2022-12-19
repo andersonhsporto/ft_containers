@@ -76,7 +76,7 @@ class Tree {
     } else
       return (node);
 
-    _updateHeight(node);
+    node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
     return (_balanceTree(node, key));
   }
 
@@ -110,7 +110,7 @@ class Tree {
         _allocator.deallocate(tmp->data, 1);
         rebind_allocator.deallocate(tmp, 1);
       } else {
-        node_type *tmp = Min(node->right);
+        node_type *tmp = minNode(node->right);
         _allocator.construct(node->data, *tmp->data);
         node->right = del(node->right, *tmp->data);
       }
@@ -148,7 +148,7 @@ class Tree {
       return (NULL);
 
     if (node->right != NULL)
-      return (Min(node->right));
+      return (minNode(node->right));
 
     node_type *next = node->parent;
     while (next != NULL && node == next->right) {
@@ -194,7 +194,7 @@ class Tree {
 
   // Return the min node of the tree
   // Left most node
-  node_type *Min(node_type *node) const {
+  node_type *minNode(node_type *node) const {
     if (!node)
       return (NULL);
 

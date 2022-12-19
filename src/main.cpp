@@ -5,9 +5,27 @@
 #include <iostream>
 #include "testsMap.hpp"
 
-int main () {
-  std::cout << "TESTE\n";
+int main() {
+  time_t start, end;
 
-  testInsert();
+  start = time(NULL);
+
+  testErase();
+  testEraseRange();
+  testSwap();
+  testCount();
+  testFind();
+  testEqualRange();
+  lowerBound();
+  testValueComp();
+  testsOperator();
+  testSlowOperation();
+
+  std::cout << "Tteste;\n";
+
+  end = time(NULL);
+
+
+  std::cout << "Time: " << end - start << " seconds" << std::endl;
   return 0;
 }

@@ -174,15 +174,16 @@ class map {
   // ##############################################################################################
 
   iterator begin() {
-    return (iterator(
-        _tree.Min(_tree.root) ? _tree.Min(_tree.root)->data : NULL, &_tree)
-        );
+    if (_tree.minNode(_tree.root))
+      return (iterator(_tree.minNode(_tree.root)->data, &_tree));
+    else
+      return (iterator(NULL, &_tree));
   }
 
   const_iterator begin() const {
     return (const_iterator(
-        _tree.Min(_tree.root) ? _tree.Min(_tree.root)->data : NULL, &_tree)
-        );
+        _tree.minNode(_tree.root) ? _tree.minNode(_tree.root)->data : NULL, &_tree)
+    );
   }
 
   iterator end() {
@@ -230,20 +231,25 @@ class map {
     _size = 0;
   }
 
+    // This function inserts a value into a data structure
   pair<iterator, bool> insert(const value_type &value) {
+    // Search the tree for the value
     Node<value_type, Allocator> *node = _tree.find(_tree.root, value);
-    bool second = false;
-
+    // If the value is not found
     if (!node) {
+      // Insert the value into the data structure
       node = _tree.insert(value);
-      second = true;
+      // Increase size
       _size++;
+      // Return an iterator pointing to the new node and true (indicating the value was successfully inserted)
+      return (ft::make_pair<iterator, bool>(iterator(node->data, &_tree), true));
     }
-    return (ft::make_pair<iterator, bool>(iterator(node->data, &_tree), second));
+    // Otherwise, return an iterator pointing to the node and false (indicating the value already exists)
+    return (ft::make_pair<iterator, bool>(iterator(node->data, &_tree), false));
   }
 
-  iterator insert(iterator hint, const value_type &value) {
-    (void)hint;
+  iterator insert(iterator pos, const value_type &value) {
+    (void)pos;
 
     return (insert(value).first);
   }
@@ -391,6 +397,7 @@ class map {
   }
 
 };
+
 template<class Key, class T, class Compare, class Allocator>
 bool operator==(const map<Key, T, Compare, Allocator> &lhs,
                 const map<Key, T, Compare, Allocator> &rhs) {

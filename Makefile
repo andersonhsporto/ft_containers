@@ -67,7 +67,7 @@ SRC		= $(addprefix ./src/, \
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $(<:%.cpp=%.o)
 
 %_std.o: %.cpp
-	$(CC) $(CFLAGS) $(INCLUDE) -DSTD=1 -c $< -o $(<:%.cpp=%_std.o)
+	$(CC) $(CFLAGS) $(INCLUDE) -DDEFAULT=1 -c $< -o $(<:%.cpp=%_std.o)
 
 all: $(NAME) $(NAME2)
 
