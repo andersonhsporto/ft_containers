@@ -6,7 +6,7 @@ NAME2	= test_std
 ####################################################################################################
 
 CC		= g++
-CFLAGS	= -Wall -Wextra -std=c++98 -fsanitize=address #-g #-Wshadow #-Werror
+CFLAGS	= -Wall -Wextra -std=c++98 #-fsanitize=address #-g #-Wshadow #-Werror
 
 ####################################################################################################
 ##################################### Include Folders ##############################################
@@ -36,7 +36,7 @@ UTILS_HEADERS	= $(addprefix ./includes/0-Utilities/, \
 					)
 
 ITERATORS_HEADERS	= $(addprefix ./includes/1-Iterators/, \
-					ft_iterator_traits.hpp \
+					iterator_traits.hpp \
 					IteratorVector.hpp \
 					MapIterator.hpp \
 					)

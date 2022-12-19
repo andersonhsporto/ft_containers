@@ -56,5 +56,7 @@ vgcore*
 # Binary files
 *replace
 test
+test_ft
+test_std
 
 /containers_test/

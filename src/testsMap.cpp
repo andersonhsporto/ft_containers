@@ -2,8 +2,21 @@
 // Created by Anderson Porto on 12/11/22.
 //
 
-#include "../includes/3-map/map.hpp"
+
+#include "../includes/0-Utilities/testsMap.hpp"
 #include <iostream>
+
+#if STD == 1
+    #include <map>
+	namespace ft = std;
+#else
+  #include "../includes/3-map/map.hpp"
+#endif
+
+void testMap() {
+  testElementAccess();
+  testBeginIterator();
+}
 
 void testElementAccess() {
   ft::map<char, int> map;

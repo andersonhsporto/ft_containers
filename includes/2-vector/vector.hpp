@@ -495,6 +495,6 @@ void swap(vector<T, Alloc> &x, vector<T, Alloc> &y) {
   x.swap(y);
 }
 
-}  // End of namespace ft
+}
 
 #endif //FT_CONTAINERS_VECTOR_HPP

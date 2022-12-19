@@ -13,9 +13,9 @@
 #include "../ft_algorithm.hpp"
 #include "../2-vector/vector.hpp"
 
-#include "../includes/1-Iterators/VectorIterator.hpp"
-#include "../includes/1-Iterators/ReverseIterator.hpp"
-#include "../includes/1-Iterators/MapIterator.hpp"
+#include "../1-Iterators/VectorIterator.hpp"
+#include "../1-Iterators/ReverseIterator.hpp"
+#include "../1-Iterators/MapIterator.hpp"
 
 #include <vector>
 #include <iostream>
