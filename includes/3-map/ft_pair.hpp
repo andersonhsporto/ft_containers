@@ -2,8 +2,8 @@
 // Created by Anderson Porto on 11/5/22.
 //
 
-#ifndef FT_CONTAINERS_FT_UTILITY_HPP
-#define FT_CONTAINERS_FT_UTILITY_HPP
+#ifndef FT_CONTAINERS_FT_PAIR_HPP
+#define FT_CONTAINERS_FT_PAIR_HPP
 
 namespace ft {
 template<class T1, class T2>
@@ -12,22 +12,24 @@ struct pair {
 
   typedef T2 second_type;
 
-  T1 first;
+  first_type first;
 
-  T2 second;
+  second_type second;
 
-  pair() : first(T1()), second(T2()) {}
-
-  pair(const T1 &x, const T2 &y) : first(x), second(y) {}
+  pair() : first(), second() {}
 
   template<class U, class V>
   pair(const pair<U, V> &pr) : first(pr.first), second(pr.second) {}
 
-  pair &operator=(const pair &pr) {
+  pair(const T1 &x, const T2 &y) : first(x), second(y) {}
+
+  pair &operator=(pair const &pr) {
     first = pr.first;
     second = pr.second;
     return *this;
   }
+
+  ~pair() {}
 
   template<class first_type, class second_type>
   void swap(pair<first_type, second_type> &x, pair<first_type, second_type> &y) {
@@ -73,9 +75,9 @@ bool operator>=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs) {
 
 template<class T1, class T2>
 pair<T1, T2> make_pair(T1 x, T2 y) {
-  return pair < T1, T2 > (x, y);
+  return pair<T1, T2>(x, y);
 }
 
 }
 
-#endif //FT_CONTAINERS_FT_UTILITY_HPP
+#endif //FT_CONTAINERS_FT_PAIR_HPP

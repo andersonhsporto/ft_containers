@@ -67,6 +67,6 @@ struct enable_if<true, T> {
   typedef T type;
 };
 
-};
+}
 
 #endif //FT_CONTAINERS_FT_ITERATOR_TYPES_HPP
