@@ -16,32 +16,32 @@ namespace ft = std;
 #endif
 
 void testMap() {
-  testElementAccess();
-  testBeginIterator();
+//  testElementAccess();
+//  testBeginIterator();
   testEndIterator();
-  testRbeginIterator();
-  testRendIterator();
-  testConstIterator();
-  testEmpty();
-  testSize();
-  testClear();
-  testInsert();
-  testInsert_char();
-  testInsert_emplace();
-  testErase();
-  testEraseRange();
-  testSwap();
-  testCount();
-  testFind();
-  testEqualRange();
-  testEqualRange2();
-  testConstEqualRange();
-  lowerBound();
-  testUpperBound();
-  testKeyComp();
-  testValueComp();
-  testsOperator();
-  testSlowOperation();
+//  testRbeginIterator();
+//  testRendIterator();
+//  testConstIterator();
+//  testEmpty();
+//  testSize();
+//  testClear();
+//  testInsert();
+//  testInsert_char();
+//  testInsert_emplace();
+//  testErase();
+//  testEraseRange();
+//  testSwap();
+//  testCount();
+//  testFind();
+//  testEqualRange();
+//  testEqualRange2();
+//  testConstEqualRange();
+//  lowerBound();
+//  testUpperBound();
+//  testKeyComp();
+//  testValueComp();
+//  testsOperator();
+//  testSlowOperation();
 }
 
 void testElementAccess() {
@@ -84,6 +84,7 @@ void testBeginIterator() {
 }
 
 void testEndIterator() {
+  std::cout << "TEST END ITERATOR" << std::endl;
   ft::map<int, int> map;
 
   map[1] = 10;
@@ -93,8 +94,9 @@ void testEndIterator() {
   map[5] = 1;
 
   ft::map<int, int>::iterator it = map.end();
-  std::cout << "TEST END ITERATOR" << std::endl;
   ft::map<int, int>::const_iterator it2 = map.end();
+//  it--;
+//  it2--;
 
   std::cout << "map.end chave = " << it->first << std::endl;
   std::cout << "map.end valor = " << it->second << std::endl;

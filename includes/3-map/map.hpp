@@ -186,8 +186,12 @@ class map {
     );
   }
 
+  // TODO: fix this
   iterator end() {
-    return iterator(NULL, &_tree);
+    if (_tree.Max(_tree.root))
+      return (iterator(_tree.Max(_tree.root)->data, &_tree));
+    else
+      return (iterator(NULL, &_tree));
   }
 
   const_iterator end() const {
