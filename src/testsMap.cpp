@@ -16,32 +16,32 @@ namespace ft = std;
 #endif
 
 void testMap() {
-//  testElementAccess();
-//  testBeginIterator();
+  testElementAccess();
+  testBeginIterator();
   testEndIterator();
-//  testRbeginIterator();
-//  testRendIterator();
-//  testConstIterator();
-//  testEmpty();
-//  testSize();
-//  testClear();
-//  testInsert();
-//  testInsert_char();
-//  testInsert_emplace();
-//  testErase();
-//  testEraseRange();
-//  testSwap();
-//  testCount();
-//  testFind();
-//  testEqualRange();
-//  testEqualRange2();
-//  testConstEqualRange();
-//  lowerBound();
-//  testUpperBound();
-//  testKeyComp();
-//  testValueComp();
-//  testsOperator();
-//  testSlowOperation();
+  testRbeginIterator();
+  testRendIterator();
+  testConstIterator();
+  testEmpty();
+  testSize();
+  testClear();
+  testInsert();
+  testInsert_char();
+  testInsert_emplace();
+  testErase();
+  testEraseRange();
+  testSwap();
+  testCount();
+  testFind();
+  testEqualRange();
+  testEqualRange2();
+  testConstEqualRange();
+  lowerBound();
+  testUpperBound();
+  testKeyComp();
+  testValueComp();
+  testsOperator();
+  testSlowOperation();
 }
 
 void testElementAccess() {
