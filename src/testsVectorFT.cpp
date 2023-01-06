@@ -1,7 +1,9 @@
 //
 // Created by Anderson Porto on 11/9/22.
 //
+
 #include "../includes/0-Utilities/testsVector.hpp"
+#include "../includes/0-Utilities/Colors.hpp"
 #include <iostream>
 
 #if DEFAULT == 1
@@ -9,30 +11,13 @@
 namespace ft = std;
 #else
 #include "../includes/2-vector/vector.hpp"
+#endif
 
 void testFtVector() {
-
-  //  testVectorOperatorEqual();
-//  testAssignIntVector();
-//  testVectorElementAccess();
-//  testVectorIterators();
-//  testRangeContructor();
-//  testVectorPushBack();
-//  testVectorPushBack10K();
-//  testVectorSize();
-//  testVectorResize();
-//  testVectorCapacity();
-//  testVectorFillConstructor();
-//  testVectorClear();
-//  testVectorInsert();
-//  testVectorErase();
-//  testSlowOperation();
-//  testVectorPopBack();
-  testVectorSwap();
-  testVectorCompares();
+testVectorSlowOperation();
 }
 
-void testSlowOperation() {
+void testVectorSlowOperation() {
   std::cout << "Vector Slow Operation" << std::endl;
 
   ft::vector<int> myvector;
@@ -168,7 +153,7 @@ void testVectorIterators() {
 
 }
 
-void testRangeContructor() {
+void testRangeConstructor() {
   std::cout << GREEN << "\nTest range constructor" << RESET << std::endl;
 
   ft::vector<int> vec;

@@ -5,13 +5,16 @@
 #include <iostream>
 #include <map>
 #include "testsMap.hpp"
+#include "testsVector.hpp"
 
 int main() {
   time_t start, end;
 
   start = time(NULL);
 
-  testMap();
+//  testMap();
+
+  testFtVector();
 
   end = time(NULL);
 

@@ -43,4 +43,40 @@ void testVectorCompares();
 
 void testFtVector();
 
+void testVectorOperatorEqual();
+
+void testAssignIntVector();
+
+void testVectorElementAccess();
+
+void testVectorIterators();
+
+void testRangeConstructor();
+
+void testVectorPushBack();
+
+void testVectorPushBack10K();
+
+void testVectorSize();
+
+void testVectorResize();
+
+void testVectorCapacity();
+
+void testVectorFillConstructor();
+
+void testVectorClear();
+
+void testVectorInsert();
+
+void testVectorErase();
+
+void testVectorSlowOperation();
+
+void testVectorPopBack();
+
+void testVectorSwap();
+
+void testVectorCompares();
+
 #endif //FT_CONTAINERS_TESTSVECTOR_HPP
