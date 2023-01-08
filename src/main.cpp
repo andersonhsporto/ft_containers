@@ -24,21 +24,28 @@ int main(int argc, const char *argv[]) {
   return 0;
 }
 
+void errorAndExit() {
+  std::cout << "Wrong Argument" << std::endl;
+  std::cout << "Usage: ./main <test>" << std::endl;
+  std::cout << "Tests: -m (Map), -v (Vector), -s (Stack)" << std::endl;
+  exit(1);
+}
 
 void testSelector(int number, const char *argv[]) {
-  if (strcmp(argv[1], "-m") == 0 && number == 2) {
+  if (number != 2) {
+    errorAndExit();
+  }
+
+  if (strcmp(argv[1], "-m") == 0) {
     std::cout << "Map Test" << std::endl;
     testMap();
-  } else if (strcmp(argv[1], "-v") == 0 && number == 2) {
+  } else if (strcmp(argv[1], "-v") == 0) {
     std::cout << "Vector Test" << std::endl;
     testFtVector();
-  } else if (strcmp(argv[1], "-s") == 0 && number == 2) {
+  } else if (strcmp(argv[1], "-s") == 0) {
     std::cout << "Stack Test" << std::endl;
     testsFtStack();
   } else {
-    std::cout << "Wrong Argument" << std::endl;
-    std::cout << "Usage: ./main <test>" << std::endl;
-    std::cout << "Tests: -m (Map), -v (Vector), -s (Stack)" << std::endl;
-    exit(1);
+    errorAndExit();
   }
 }
