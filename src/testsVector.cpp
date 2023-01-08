@@ -34,6 +34,7 @@ void testFtVector() {
   testVectorPopBack();
   testVectorSwap();
   testVectorCompares();
+  testVectorClear();
 }
 
 void testVectorSlowOperation() {

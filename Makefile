@@ -56,7 +56,8 @@ MAP_HEADERS	= $(addprefix ./includes/3-map/, \
 SRC		= $(addprefix ./src/, \
           	main.cpp \
           	testsMap.cpp \
-          	testsVectorFT.cpp \
+          	testsVector.cpp \
+          	testsStack.cpp \
 		  	)
 
 ####################################################################################################

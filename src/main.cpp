@@ -6,6 +6,7 @@
 #include <map>
 #include "testsMap.hpp"
 #include "testsVector.hpp"
+#include "testsStack.hpp"
 
 int main() {
   time_t start, end;
@@ -14,7 +15,10 @@ int main() {
 
 //  testMap();
 
-  testFtVector();
+//  testFtVector();
+
+  testsFtStack();
+
 
   end = time(NULL);
 
