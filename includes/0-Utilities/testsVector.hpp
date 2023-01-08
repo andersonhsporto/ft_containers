@@ -5,6 +5,8 @@
 #ifndef FT_CONTAINERS_TESTSVECTOR_HPP
 #define FT_CONTAINERS_TESTSVECTOR_HPP
 
+void testVectorClear();
+
 void testFtVector();
 
 void testVectorSlowOperation();
