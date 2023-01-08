@@ -51,6 +51,7 @@ class vector {
 
   // default constructor without parameters
   vector() : _size(0), _capacity(0), _data(NULL) {
+
     _allocator = allocator_type();
   }
 

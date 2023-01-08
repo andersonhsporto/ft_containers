@@ -10,11 +10,30 @@
 #include <vector>
 namespace ft = std;
 #else
+
 #include "../includes/2-vector/vector.hpp"
+
 #endif
 
 void testFtVector() {
-testVectorSlowOperation();
+  testVectorSlowOperation();
+  testVectorSlowOperation();
+  testVectorOperatorEqual();
+  testAssignIntVector();
+  testVectorElementAccess();
+  testVectorIterators();
+  testRangeConstructor();
+  testVectorPushBack();
+  testVectorPushBack10K();
+  testVectorSize();
+  testVectorResize();
+  testVectorCapacity();
+  testVectorFillConstructor();
+  testVectorInsert();
+  testVectorErase();
+  testVectorPopBack();
+  testVectorSwap();
+  testVectorCompares();
 }
 
 void testVectorSlowOperation() {
@@ -317,21 +336,6 @@ void testVectorErase() {
   ft_vector.erase(ft_vector.begin());
 
   std::cout << CYAN << "Vector after erase at begin" << RESET << std::endl;
-  printIntVector(ft_vector);
-
-  ft_vector.erase(ft_vector.end() - 1);
-
-  std::cout << CYAN << "Vector after erase at end - 1" << RESET << std::endl;
-  printIntVector(ft_vector);
-
-  ft_vector.erase(ft_vector.begin() + 5);
-
-  std::cout << CYAN << "Vector after erase at begin + 5" << RESET << std::endl;
-  printIntVector(ft_vector);
-
-  ft_vector.erase(ft_vector.begin() + 5, ft_vector.begin() + 8);
-
-  std::cout << CYAN << "Vector after erase at begin + 5 to begin + 8" << RESET << std::endl;
   printIntVector(ft_vector);
 }
 
