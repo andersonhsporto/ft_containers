@@ -99,10 +99,11 @@ class map {
       const allocator_type &alloc = allocator_type())
       : _comparator(comp), _allocator(alloc) {
     _size = 0;
-    while (first != last) {
+    do {
       insert(*first);
       first++;
     }
+    while (first != last);
     _comparator = comp;
     _allocator = alloc;
   }
