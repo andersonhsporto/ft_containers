@@ -186,11 +186,7 @@ class map {
     );
   }
 
-  // TODO: fix this
   iterator end() {
-    if (_tree.Max(_tree.root))
-      return (iterator(_tree.Max(_tree.root)->data, &_tree));
-    else
       return (iterator(NULL, &_tree));
   }
 

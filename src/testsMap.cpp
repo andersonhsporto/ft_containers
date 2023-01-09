@@ -93,17 +93,27 @@ void testEndIterator() {
   map[4] = 70;
   map[5] = 1;
 
-  ft::map<int, int>::iterator it = map.end();
-  ft::map<int, int>::const_iterator it2 = map.end();
-//  it--;
-//  it2--;
+  ft::map<int, int>::iterator end_it = map.end();
 
-  std::cout << "map.end chave = " << it->first << std::endl;
-  std::cout << "map.end valor = " << it->second << std::endl;
+  for (ft::map<int, int>::iterator it = map.begin(); it != end_it; ++it)
+    std::cout << "CHAVE:" << it->first << " VALOR:" << it->second << '\n';
 
-  std::cout << "const map.end chave = " << it2->first << std::endl;
-  std::cout << "const map.end valor = " << it2->second << std::endl;
-  std::cout << "------------------------" << std::endl;
+  ft::map<int, std::string> stringMap;
+
+  stringMap[1] = "Frodo";
+  stringMap[2] = "Sam";
+  stringMap[3] = "Gandalf";
+  stringMap[4] = "Legolas";
+  stringMap[5] = "Gimli";
+  stringMap[6] = "Aragorn";
+  stringMap[7] = "Boromir";
+  stringMap[8] = "Merry";
+  stringMap[9] = "Pippin";
+
+  ft::map<int, std::string>::iterator end_it2 = stringMap.end();
+
+  for (ft::map<int, std::string>::iterator it = stringMap.begin(); it != end_it2; ++it)
+    std::cout << "CHAVE:" << it->first << " VALOR:" << it->second << '\n';
 }
 
 void testRbeginIterator() {
