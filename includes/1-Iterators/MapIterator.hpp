@@ -43,7 +43,6 @@ class MapIterator {
   ~MapIterator(void) {}
 
   operator MapIterator<const T, Compare, Allocator>() const {
-    std::cout << "teste\n";
     return (MapIterator<const T, Compare, Allocator>(
         _pointer, reinterpret_cast<Tree<const value_type, Compare, Allocator> const *>(_tree)));
   }

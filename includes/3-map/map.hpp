@@ -70,7 +70,7 @@ class map {
    protected:
     Compare comp;
 
-    value_compare(Compare c) : comp(c) {}
+    explicit value_compare(Compare c) : comp(c) {}
 
    public:
     typedef bool result_type;
