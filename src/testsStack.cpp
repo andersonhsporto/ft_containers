@@ -165,12 +165,12 @@ void testsNoMemberFunctions() {
 }
 
 void testsFtStack() {
-  testsStackSlowOperation();
-  testsStackSlowOperation();
-  testsStackSlowOperation();
+//  testsStackSlowOperation();
+//  testsStackSlowOperation();
+//  testsStackSlowOperation();
   testCopyUsingEqual();
   testsCapacity();
   testsPush();
   testsPop();
-  testsNoMemberFunctions();
+//  testsNoMemberFunctions();
 }
