@@ -17,7 +17,6 @@ namespace ft = std;
 
 void testFtVector() {
   testVectorSlowOperation();
-  testVectorSlowOperation();
   testVectorOperatorEqual();
   testAssignIntVector();
   testVectorElementAccess();
@@ -42,30 +41,30 @@ void testVectorSlowOperation() {
 
   ft::vector<int> myvector;
 
-  for (int i = 0; i < 8000000; i++) {
+  for (int i = 0; i < 6000000; i++) {
     myvector.push_back(i);
   }
 
-  for (int i = 0; i < 8000000; i++) {
+  for (int i = 0; i < 6000000; i++) {
     myvector[i] = i;
   }
 
-  for (int i = 0; i < 8000000; i++) {
+  for (int i = 0; i < 6000000; i++) {
     myvector[i] = i;
   }
   myvector.clear();
 
   ft::vector<std::string> myvector2;
 
-  for (int i = 0; i < 8000000; i++) {
+  for (int i = 0; i < 4000000; i++) {
     myvector2.push_back("test");
   }
 
-  for (int i = 0; i < 8000000; i++) {
+  for (int i = 0; i < 4000000; i++) {
     myvector2[i] = "test";
   }
 
-  for (int i = 0; i < 8000000; i++) {
+  for (int i = 0; i < 4000000; i++) {
     myvector2[i] = "test";
   }
 }

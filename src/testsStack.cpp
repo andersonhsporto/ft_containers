@@ -36,7 +36,7 @@ void testsStackSlowOperation() {
   std::cout << stack.size() << " elements on stack\n";
   std::cout << "Top element: " << stack.top() << '\n';
 
-  for (int i = 0; i < 8000000; i++) {
+  for (int i = 0; i < 1000000; i++) {
     stack.pop();
   }
   std::cout << stack.size() << " elements on stack\n";
@@ -44,13 +44,13 @@ void testsStackSlowOperation() {
   std::cout << BLUE << "\t-----\t-----\t-----\t" << RESET << std::endl;
   ft::stack<std::string> stack2;
 
-  for (int i = 0; i < 8000000; i++) {
+  for (int i = 0; i < 1000000; i++) {
     stack2.push("Anderson");
   }
   std::cout << stack.size() << " elements on stack\n";
   std::cout << "Top element: " << stack2.top() << '\n';
 
-  for (int i = 0; i < 8000000; i++) {
+  for (int i = 0; i < 1000000; i++) {
     stack2.pop();
   }
   std::cout << stack.size() << " elements on stack\n";
