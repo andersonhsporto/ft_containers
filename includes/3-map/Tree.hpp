@@ -32,10 +32,10 @@ class Tree {
   Tree(Tree const &copy) { *this = copy; }
 
   Tree &operator=(Tree const &copy) {
-    if (this == &copy)
-      return (*this);
-    root = copy.root;
-    _comparator = copy._comparator;
+    if (this != &copy) {
+      root = copy.root;
+      _comparator = copy._comparator;
+    }
     return (*this);
   }
 
@@ -63,10 +63,22 @@ class Tree {
     return (root);
   }
 
+  // This function is used to insert a new node with a given key
+  // into an existing AVL tree. It returns the root of the modified
+  // The function first checks if the node is empty.
+  // If it is, it creates a new node containing the given key.
+  // Then, it checks if the given key is smaller or greater than the root of the tree
+  // (using the _comparator function).
+  // If it is smaller, it inserts the node in the left subtree;
+  // if it is greater, in the right. If the node already exists,
+  // the function simply returns that node.
+  // Finally, it updates the height of the tree and balances it (using the _balanceTree function).
   node_type *insert(node_type *node, const value_type &key) {
+    // The function first checks if the node is empty.
     if (!node)
       return (_newNode(key));
 
+    // checks if the given key is smaller or greater than the root of the tree
     if (_comparator(key.first, node->data->first)) {
       node->left = insert(node->left, key);
       node->left->parent = node;
@@ -83,9 +95,9 @@ class Tree {
   bool del(value_type key) {
     if (find(root, key)) {
       this->root = this->del(this->root, key);
-      return (true);
+      return true;
     }
-    return (false);
+    return false;
   }
 
   node_type *del(node_type *node, value_type const &key) {
@@ -259,8 +271,6 @@ class Tree {
     return (node);
   }
 
-
-
   /*
 
     z                                y
@@ -316,3 +326,4 @@ class Tree {
 }
 
 #endif
+
