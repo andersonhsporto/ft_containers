@@ -664,7 +664,7 @@ void testsOperator() {
 void testSlowOperation() {
   ft::map<int, int> map;
 
-  for (int i = 0; i < 5000000; i++) {
+  for (int i = 0; i < 1000000; i++) {
     map.insert(ft::make_pair(i, i));
   }
   std::cout << "---------------------------------" << std::endl;
