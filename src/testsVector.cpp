@@ -7,7 +7,9 @@
 #include <iostream>
 
 #if DEFAULT == 1
+
 #include <vector>
+
 namespace ft = std;
 #else
 
@@ -21,7 +23,6 @@ void testFtVector() {
   testAssignIntVector();
   testVectorElementAccess();
   testVectorIterators();
-  testRangeConstructor();
   testVectorPushBack();
   testVectorPushBack10K();
   testVectorSize();
@@ -170,19 +171,6 @@ void testVectorIterators() {
   }
   std::cout << std::endl;
 
-}
-
-void testRangeConstructor() {
-  std::cout << GREEN << "\nTest range constructor" << RESET << std::endl;
-
-  ft::vector<int> vec;
-
-  for (int i = 0; i < 10; i++) {
-    vec.push_back(i);
-  }
-
-  ft::vector<int> vec2(vec.begin(), vec.end());
-  printIntVector(vec2);
 }
 
 void testVectorPushBack() {

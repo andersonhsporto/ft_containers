@@ -7,7 +7,9 @@
 #include <iostream>
 
 #if DEFAULT == 1
+
 #include <stack>
+
 namespace ft = std;
 #else
 
@@ -131,43 +133,42 @@ void testsPop() {
 }
 
 void testsNoMemberFunctions() {
-    std::cout << GREEN << "Tests No Member Functions" << RESET << std::endl;
-    std::cout << GREEN << "\t-----\t-----\t-----\t" << RESET << std::endl;
-    ft::stack<int> stack;
-    ft::stack<int> stack2;
+  std::cout << GREEN << "Tests No Member Functions" << RESET << std::endl;
+  std::cout << GREEN << "\t-----\t-----\t-----\t" << RESET << std::endl;
+  ft::stack<int> stack;
+  ft::stack<int> stack2;
 
-    for (int i = 0; i < 10; i++) {
-        stack.push(i);
-    }
+  for (int i = 0; i < 10; i++) {
+    stack.push(i);
+  }
 
+  std::cout << "Operator== 1 stack with 10 elements and another empty" << std::endl;
+  std::cout << (stack == stack2) << std::endl;
 
-    std::cout << "Operator== 1 stack with 10 elements and another empty"<< std::endl;
-    std::cout << (stack == stack2) << std::endl;
+  std::cout << "Operator!= 1 stack with 10 elements and another empty" << std::endl;
+  std::cout << (stack != stack2) << std::endl;
 
-    std::cout << "Operator!= 1 stack with 10 elements and another empty" << std::endl;
-    std::cout << (stack != stack2) << std::endl;
+  std::cout << "Operator< 1 stack with 10 elements and another empty" << std::endl;
+  std::cout << (stack < stack2) << std::endl;
 
-    std::cout << "Operator< 1 stack with 10 elements and another empty" << std::endl;
-    std::cout << (stack < stack2) << std::endl;
+  std::cout << "Operator<= 1 stack with 10 elements and another empty" << std::endl;
+  std::cout << (stack <= stack2) << std::endl;
 
-    std::cout << "Operator<= 1 stack with 10 elements and another empty" << std::endl;
-    std::cout << (stack <= stack2) << std::endl;
+  std::cout << "Operator> 1 stack with 10 elements and another empty" << std::endl;
+  std::cout << (stack > stack2) << std::endl;
 
-    std::cout << "Operator> 1 stack with 10 elements and another empty" << std::endl;
-    std::cout << (stack > stack2) << std::endl;
+  std::cout << "Operator>= 1 stack with 10 elements and another empty" << std::endl;
+  std::cout << (stack >= stack2) << std::endl;
 
-    std::cout << "Operator>= 1 stack with 10 elements and another empty" << std::endl;
-    std::cout << (stack >= stack2) << std::endl;
-
-    std::cout << BLUE << "\t-----\t-----\t-----\t" << RESET << std::endl;
-    std::cout << std::endl;
-    std::cout << BLUE << "\t-----\t-----\t-----\t" << RESET << std::endl;
+  std::cout << BLUE << "\t-----\t-----\t-----\t" << RESET << std::endl;
+  std::cout << std::endl;
+  std::cout << BLUE << "\t-----\t-----\t-----\t" << RESET << std::endl;
 }
 
 void testsFtStack() {
 //  testsStackSlowOperation();
 //  testsStackSlowOperation();
-//  testsStackSlowOperation();
+  testsStackSlowOperation();
   testCopyUsingEqual();
   testsCapacity();
   testsPush();

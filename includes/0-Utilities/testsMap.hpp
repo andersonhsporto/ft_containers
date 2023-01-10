@@ -5,7 +5,6 @@
 #ifndef FT_CONTAINERS_TESTSMAP_HPP
 #define FT_CONTAINERS_TESTSMAP_HPP
 
-
 void testElementAccess();
 
 void testBeginIterator();

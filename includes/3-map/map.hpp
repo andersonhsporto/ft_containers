@@ -102,8 +102,7 @@ class map {
     do {
       insert(*first);
       first++;
-    }
-    while (first != last);
+    } while (first != last);
     _comparator = comp;
     _allocator = alloc;
   }
@@ -188,7 +187,7 @@ class map {
   }
 
   iterator end() {
-      return (iterator(NULL, &_tree));
+    return (iterator(NULL, &_tree));
   }
 
   const_iterator end() const {
@@ -233,7 +232,7 @@ class map {
     _size = 0;
   }
 
-    // This function inserts a value into a data structure
+  // This function inserts a value into a data structure
   pair<iterator, bool> insert(const value_type &value) {
     // Search the tree for the value
     Node<value_type, Allocator> *node = _tree.find(_tree.root, value);

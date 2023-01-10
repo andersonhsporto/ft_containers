@@ -37,7 +37,7 @@ class MapIterator {
   MapIterator &operator=(MapIterator const &copy) {
     _pointer = copy._pointer;
     _tree = copy._tree;
-    return (*this);
+    return *this;
   }
 
   ~MapIterator(void) {}
@@ -74,14 +74,14 @@ class MapIterator {
       else
         _pointer = NULL;
     }
-    return (*this);
+    return *this;
   }
 
   MapIterator operator++(int) {
     MapIterator tmp = *this;
 
     ++(*this);
-    return (tmp);
+    return tmp;
   }
 
   MapIterator &operator--() {
@@ -107,7 +107,7 @@ class MapIterator {
     MapIterator tmp = *this;
 
     --(*this);
-    return (tmp);
+    return tmp;
   }
 
  private:

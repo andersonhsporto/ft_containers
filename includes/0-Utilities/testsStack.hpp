@@ -6,6 +6,7 @@
 #define FT_CONTAINERS_TESTSSTACK_HPP
 
 void testsCapacity();
+
 void testCopyUsingEqual();
 
 void testsStackSlowOperation();

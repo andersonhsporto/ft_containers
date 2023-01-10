@@ -57,11 +57,8 @@ class vector {
     _storageSpace = count;
     _allocator = alloc;
     _data = _allocator.allocate(count);
-    size_type i = 0;
-    do {
-      i++;
-    } while (i < count);
-    _allocator.construct(_data + i, value);
+    for (size_type i = 0; i < count; i++)
+      _allocator.construct(_data + i, value);
   }
 
   template<class Interator>
@@ -70,8 +67,9 @@ class vector {
          const allocator_type &alloc = allocator_type(),
          typename ft::enable_if<!ft::is_integral<Interator>::value,
                                 Interator>::type = Interator()) {
-    _data = _allocator.allocate(last - first);
     size_type temp = last - first;
+    _deallocate();
+    _data = _allocator.allocate(temp);
     for (size_type i = 0; i < temp; i++) {
       _allocator.construct(_data + i, *first);
       first++;
@@ -99,7 +97,7 @@ class vector {
       for (size_type i = 0; i < _size; i++)
         _allocator.construct(_data + i, other._data[i]);
     }
-    return (*this);
+    return *this;
   }
 
   ~vector() {
@@ -139,7 +137,7 @@ class vector {
   }
 
   size_type size() const {
-    return (_size);
+    return _size;
   }
 
   size_type max_size() const {
@@ -194,29 +192,54 @@ class vector {
 // *************************************** ITERATORS *********************************************
 // ***********************************************************************************************
 
-  value_type *data() { return (_data ? _data : NULL); }
+  value_type *data() {
+    return _data;
+  }
 
-  const value_type *data() const { return (_data ? _data : NULL); }
+  const value_type *data() const {
+    return _data;
+  }
 
-  iterator begin() { return (iterator(_data)); }
+  iterator begin() {
+    return iterator(_data);
+  }
 
-  const_iterator begin() const { return (const_iterator(_data)); }
+  const_iterator begin() const {
+    return const_iterator(_data);
+  }
 
-  iterator end() { return (iterator(_data + _size)); }
+  iterator end() {
+    return iterator(_data + _size);
+  }
 
-  const_iterator end() const { return (const_iterator(_data + _size)); }
+  const_iterator end() const {
+    return const_iterator(_data + _size);
+  }
 
-  reverse_iterator rbegin() { return (reverse_iterator(end())); }
+  reverse_iterator rbegin() {
+    return reverse_iterator(end());
+  }
 
-  const_reverse_iterator rbegin() const { return (const_reverse_iterator(end())); }
+  const_reverse_iterator rbegin() const {
+    return const_reverse_iterator(end());
+  }
 
-  reverse_iterator rend() { return (reverse_iterator(begin())); }
+  reverse_iterator rend() {
+    return reverse_iterator(begin());
+  }
 
-  const_reverse_iterator rend() const { return (const_reverse_iterator(begin())); }
+  const_reverse_iterator rend() const {
+    return const_reverse_iterator(begin());
+  }
+
+  // ***********************************************************************************************
+  // *************************************** MODIFIERS *********************************************
+  // ***********************************************************************************************
 
   void reserve(size_type new_cap) {
     if (new_cap > max_size())
       throw std::length_error("ft::vector::length_error");
+
     if (new_cap > _storageSpace) {
       pointer ptr2 = _allocator.allocate(new_cap);
       for (size_type i = 0; i < _size; i++)
