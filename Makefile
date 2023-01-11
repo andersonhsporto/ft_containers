@@ -75,22 +75,22 @@ SRC		= $(addprefix ./src/, \
 
 all: $(NAME) $(NAME2)
 
-OBJ		= $(SRC:%.cpp=%.o)
+OBJ_STD	= $(SRC:%.cpp=%.o)
 
-OBJ2	= $(SRC:%.cpp=%_std.o)
+OBJ_FT	= $(SRC:%.cpp=%_std.o)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJ_STD)
+	$(CC) $(CFLAGS) $(OBJ_STD) -o $(NAME)
 
-$(NAME2): $(OBJ2)
-	$(CC) $(CFLAGS) $(OBJ2) -DSTD=1 -o $(NAME2)
+$(NAME2): $(OBJ_FT)
+	$(CC) $(CFLAGS) $(OBJ_FT) -DSTD=1 -o $(NAME2)
 
 ####################################################################################################
 ########################################## Default Rules ###########################################
 ####################################################################################################
 
 clean:
-	rm -rf $(OBJ) $(OBJ2)
+	rm -rf $(OBJ_STD) $(OBJ_FT)
 
 fclean: clean
 	rm -rf $(NAME) $(NAME2)
