@@ -138,9 +138,9 @@ bool operator<=(const ReverseIterator<Iterator> &lhs,
   return (lhs.base() >= rhs.base());
 }
 
-template<class Iterator>
-bool operator>=(const ReverseIterator<Iterator> &lhs,
-                const ReverseIterator<Iterator> &rhs) {
+template <typename IteratorL, typename IteratorR>
+bool operator>=(const ReverseIterator<IteratorL> &lhs,
+                const ReverseIterator<IteratorR> &rhs) {
   return (lhs.base() <= rhs.base());
 }
 

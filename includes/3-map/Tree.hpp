@@ -100,6 +100,14 @@ class Tree {
     return false;
   }
 
+  // This function is a part of a data structure where "node_type" is the type of the nodes,
+  // "value_type" is the type of the values stored in the nodes, "key" is the key
+  // for which the associated node is to be found and removed.
+  // The function searches for the node associated with the given key,
+  // removes it from the tree and returns the address of the resulting root of the tree.
+  // If the node with the given key is not found, the original tree is returned.
+  // Otherwise, the node is removed. The function also checks if the resulting tree
+  // is balanced and balances it if it is not. Finally, it returns the address of the balanced tree.
   node_type *del(node_type *node, value_type const &key) {
     if (!node)
       return (node);

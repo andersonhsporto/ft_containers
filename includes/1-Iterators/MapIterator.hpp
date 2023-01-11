@@ -40,7 +40,7 @@ class MapIterator {
     return *this;
   }
 
-  ~MapIterator(void) {}
+  ~MapIterator() {}
 
   operator MapIterator<const T, Compare, Allocator>() const {
     return (MapIterator<const T, Compare, Allocator>(

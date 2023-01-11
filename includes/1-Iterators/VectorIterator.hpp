@@ -22,7 +22,9 @@ class VectorIterator {
 
   explicit VectorIterator(value_type *it) : _it(it) {}
 
-  VectorIterator(VectorIterator const &copy) {
+  VectorIterator(const value_type *it) : _it(it) {}
+
+  VectorIterator(const VectorIterator &copy) {
     *this = copy;
   }
 
@@ -126,46 +128,51 @@ typename VectorIterator<Iterator>::difference_type operator-(const VectorIterato
 }
 
 template<class Iterator>
-typename VectorIterator<Iterator>::difference_type operator+(typename VectorIterator<
-    Iterator>::difference_type n,
-                                                             const VectorIterator<
-                                                                 Iterator> &it) {
+typename VectorIterator<Iterator>::difference_type operator+(
+    typename VectorIterator<Iterator>::difference_type n,
+    const VectorIterator<Iterator> &it) {
   return VectorIterator<Iterator>(it.base() + n);
 }
 
-template<class Iterator>
-bool operator==(const VectorIterator<Iterator> &lhs,
-                const VectorIterator<Iterator> &rhs) {
+template<typename IteratorLeft, typename IteratorRight>
+bool operator==(const VectorIterator<IteratorLeft> &lhs,
+                const VectorIterator<IteratorRight> &rhs) {
   return lhs.base() == rhs.base();
 }
 
-template<class Iterator>
-bool operator!=(const VectorIterator<Iterator> &lhs,
-                const VectorIterator<Iterator> &rhs) {
+template<typename IteratorLeft, typename IteratorRight>
+bool operator!=(const VectorIterator<IteratorLeft> &lhs,
+                const VectorIterator<IteratorRight> &rhs) {
   return lhs.base() != rhs.base();
 }
 
-template<class Iterator>
-bool operator<(const VectorIterator<Iterator> &lhs,
-               const VectorIterator<Iterator> &rhs) {
+template<typename IteratorLeft, typename IteratorRight>
+bool operator<(const VectorIterator<IteratorLeft> &lhs,
+               const VectorIterator<IteratorRight> &rhs) {
   return lhs.base() > rhs.base();
 }
 
-template<class Iterator>
-bool operator>(const VectorIterator<Iterator> &lhs,
-               const VectorIterator<Iterator> &rhs) {
+template<typename IteratorLeft, typename IteratorRight>
+bool operator>(const VectorIterator<IteratorLeft> &lhs,
+               const VectorIterator<IteratorRight> &rhs) {
   return lhs.base() < rhs.base();
 }
 
-template<class Iterator>
-bool operator<=(const VectorIterator<Iterator> &lhs,
-                const VectorIterator<Iterator> &rhs) {
+template<typename IteratorLeft, typename IteratorRight>
+bool operator<=(const VectorIterator<IteratorLeft> &lhs,
+                const VectorIterator<IteratorRight> &rhs) {
   return lhs.base() >= rhs.base();
 }
 
-template<class Iterator>
-bool operator>=(const VectorIterator<Iterator> &lhs,
-                const VectorIterator<Iterator> &rhs) {
+template<typename IteratorLeft, typename IteratorRight>
+bool operator>=(const VectorIterator<IteratorLeft> &lhs,
+                const VectorIterator<IteratorRight> &rhs) {
+  return lhs.base() <= rhs.base();
+}
+
+template<typename IteratorLeft, typename IteratorRight>
+bool operator>=(const VectorIterator<IteratorLeft> &lhs,
+                VectorIterator<IteratorRight> &rhs) {
   return lhs.base() <= rhs.base();
 }
 

@@ -5,13 +5,17 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
+#include <map>
 #include "testsMap.hpp"
 #include "testsVector.hpp"
 #include "testsStack.hpp"
 
 void testSelector(int number, const char *argv[]);
 
+#include "../includes/3-map/map.hpp"
+
 int main(int argc, const char *argv[]) {
+
   time_t start, end;
 
   start = time(NULL);
