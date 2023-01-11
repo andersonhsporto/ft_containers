@@ -148,7 +148,7 @@ class vector {
   // *************************************** ELEMENT ACCESS ****************************************
   // ***********************************************************************************************
 
-  allocator_type get_allocatorator() const {
+  allocator_type get_allocator() const {
     return (_allocator);
   }
 

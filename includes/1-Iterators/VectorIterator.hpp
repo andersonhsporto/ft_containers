@@ -18,11 +18,9 @@ class VectorIterator {
 
   typedef std::random_access_iterator_tag iterator_category;
 
-  VectorIterator(void) : _it() {}
+  VectorIterator() : _it() {}
 
   explicit VectorIterator(value_type *it) : _it(it) {}
-
-  VectorIterator(const value_type *it) : _it(it) {}
 
   VectorIterator(const VectorIterator &copy) {
     *this = copy;
@@ -90,15 +88,15 @@ class VectorIterator {
   }
 
   bool operator>(VectorIterator<T> const &obj) {
-    return (_it > obj._it);
+    return _it > obj._it;
   }
 
   bool operator<=(VectorIterator<T> const &obj) {
-    return (_it <= obj._it);
+    return _it <= obj._it;
   }
 
   bool operator>=(VectorIterator<T> const &obj) {
-    return (_it >= obj._it);
+    return _it >= obj._it;
   }
 
   VectorIterator &operator+=(difference_type value) {
