@@ -67,23 +67,23 @@ SRC		= $(addprefix ./src/, \
 ########################################## Objects files ###########################################
 ####################################################################################################
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $(<:%.cpp=%.o)
+%_ft.o: %.cpp
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $(<:%.cpp=%_ft.o)
 
 %_std.o: %.cpp
 	$(CC) $(CFLAGS) $(INCLUDE) -DDEFAULT=1 -c $< -o $(<:%.cpp=%_std.o)
 
 all: $(NAME) $(NAME2)
 
-OBJ_STD	= $(SRC:%.cpp=%.o)
+OBJ_FT	= $(SRC:%.cpp=%_ft.o)
 
-OBJ_FT	= $(SRC:%.cpp=%_std.o)
+OBJ_STD	= $(SRC:%.cpp=%_std.o)
 
-$(NAME): $(OBJ_STD)
-	$(CC) $(CFLAGS) $(OBJ_STD) -o $(NAME)
+$(NAME): $(OBJ_FT)
+	$(CC) $(CFLAGS) $(OBJ_FT) -o $(NAME)
 
-$(NAME2): $(OBJ_FT)
-	$(CC) $(CFLAGS) $(OBJ_FT) -DSTD=1 -o $(NAME2)
+$(NAME2): $(OBJ_STD)
+	$(CC) $(CFLAGS) $(OBJ_STD) -DDEFAULT=1 -o $(NAME2)
 
 ####################################################################################################
 ########################################## Default Rules ###########################################
